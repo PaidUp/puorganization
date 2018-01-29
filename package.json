@@ -1,10 +1,10 @@
 {
-  "name": "pu-product",
+  "name": "pu-organization",
   "version": "0.0.1",
-  "description": "microservices PUProduct",
+  "description": "microservices PUOrganization",
   "main": "server/app.js",
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=8.9.1"
   },
   "eslintConfig": {
     "env": {
