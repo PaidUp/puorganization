@@ -75,7 +75,7 @@ it('PUT# /:productId/ it should update a product', done => {
       res.should.have.status(200)
       res.body.should.have.property('image')
       res.body.paymentId.should.be.a('string')
-      res.body.image.should.equal('value image url updated fail')
+      res.body.image.should.equal('value image url updated')
 
       done()
     })
