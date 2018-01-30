@@ -18,6 +18,9 @@ jobs:
 
     steps:
       - run:
+          name: update software
+          command: sudo apt-get update
+      - run:
           name: install common software
           command: sudo apt-get install software-properties-common
       - run:
