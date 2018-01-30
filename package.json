@@ -1,6 +1,6 @@
 {
   "name": "pu-organization",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "microservices PUOrganization",
   "main": "server/app.js",
   "engines": {
@@ -16,8 +16,13 @@
     "start": "node dist/build.js",
     "test": "mocha --timeout 10000 --compilers js:babel-core/register ./test/**/*.spec.js",
     "jenkins": "npm test",
-    "dev": "cross-env NODE_ENV=development webpack --watch",
+    "watch": "cross-env NODE_ENV=development webpack --watch",
+    "dev": "cross-env NODE_ENV=development webpack",
+    "stage": "cross-env NODE_ENV=stage webpack",
     "prod": "cross-env NODE_ENV=production webpack",
+    "deploy-dev": "npm run dev && pm2 start deploy/ecosystem-dev.json",
+    "deploy-stg": "npm run stage && pm2 start deploy/ecosystem-stg.json",
+    "deploy-prod": "npm run prod && pm2 start deploy/ecosystem-prod.json",
     "compile": "babel --source-maps -d compile/ server/"
   },
   "keywords": [
