@@ -1,0 +1,2 @@
+[instance]
+dev.getpaidup.com     ansible_connection=ssh        ansible_user=jenkins

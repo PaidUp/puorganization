@@ -1,0 +1,9 @@
+- hosts: aws
+  remote_user: jenkins
+  tasks:
+  - name: Pull sources from the repository.
+    sudo: no
+    git: repo=git@github.com:PaidUp/PUOrganization.git
+           ssh_opts="-o StrictHostKeyChecking=no"
+           dest=/var/lib/jenkins/workspace/Dev_PUOrganization
+           version=develop
