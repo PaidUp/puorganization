@@ -3,7 +3,7 @@
 const mongoHost =
   process.env.TDUSER_MONGO_HOST || 'pu-dev-shard-00-00-4nodg.mongodb.net:27017,pu-dev-shard-00-01-4nodg.mongodb.net:27017,pu-dev-shard-00-02-4nodg.mongodb.net:27017'
 module.exports = {
-  port: process.env.PORT || 9007,
+  port: process.env.PORT || 9008,
   mongo: {
     uri: 'mongodb://' + mongoHost + '/develop',
     prefix: 'pu_product_',
