@@ -52,8 +52,26 @@ jobs:
           sudo apt-get install ansible
       - checkout
       - run:
-          name: Deploy if tests pass and branch is Staging
+          name: Deploy if tests pass and branch is develop
           command: ansible-playbook deploy/develop.yml -i ./deploy/inventory 
+
+  deploy-stage:
+    docker:
+      - image: circleci/node:8.9
+    environment:
+      - ANSIBLE_HOST_KEY_CHECKING: false
+    working_directory: /tmp/pu-organization  
+    steps:
+      - run: |
+          sudo apt-get update &&
+          sudo apt-get install software-properties-common &&
+          sudo apt-add-repository "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" -y &&
+          sudo apt-get update &&
+          sudo apt-get install ansible
+      - checkout
+      - run:
+          name: Deploy if tests pass and branch is stage
+          command: ansible-playbook deploy/stage.yml -i ./deploy/inventory 
 
 workflows:
   version: 2
@@ -66,3 +84,9 @@ workflows:
           filters:
             branches:
               only: develop
+      - deploy-stage:
+          requires:
+            - build
+          filters:
+            branches:
+              only: stage
