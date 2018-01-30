@@ -3,6 +3,6 @@
   tasks:
   - name: Pull sources from the repository.
     git: 
-      repo: 'git@github.com:PaidUp/PUOrganization.git'
+      repo: git@github.com:PaidUp/PUOrganization.git
       dest: /var/lib/jenkins/workspace/Dev_PUOrganization
       version: develop
