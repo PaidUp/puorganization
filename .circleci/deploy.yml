@@ -1,19 +1,26 @@
 - hosts: aws
   remote_user: jenkins
   tasks:
-  - name: Pull sources from the repository.
-    git: 
-      repo: git@github.com:PaidUp/PUOrganization.git
-      dest: /var/lib/jenkins/workspace/Dev_PUOrganization
-      version: develop
+##  - name: Pull sources from the repository.
+##    git: 
+##      repo: git@github.com:PaidUp/PUOrganization.git
+##      dest: /var/lib/jenkins/workspace/Dev_PUOrganization
+##      version: develop
 
-  - name: install node modules
-    shell: npm install
-    args:
-      chdir: /var/lib/jenkins/workspace/Dev_PUOrganization
+##  - name: install node modules
+##    shell: npm install
+##    args:
+##      chdir: /var/lib/jenkins/workspace/Dev_PUOrganization
 
-  - name: build to production
-    shell: npm run prod
-    args:
-      chdir: /var/lib/jenkins/workspace/Dev_PUOrganization
+##  - name: build to production
+##    shell: npm run prod
+##    args:
+##      chdir: /var/lib/jenkins/workspace/Dev_PUOrganization
+
+  - name: NODE | Stop APP
+    shell: pm2 list
+    register: myoutput
+
+  - debug: 
+      msg: "{{myoutput.stdout}}"
  
