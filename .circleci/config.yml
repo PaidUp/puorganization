@@ -18,20 +18,18 @@ jobs:
 
     steps:
       - run:
-          name: update software
-          command: sudo apt-get update
+          name: add repo
+          command: deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main
       - run:
-          name: install common software
-          command: sudo apt-get install software-properties-common
+          name: add key
+          command: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
       - run:
-          name: add repo ansible
-          command: sudo apt-add-repository ppa:ansible/ansible -y
-      - run:
-          name: update software
+          name: update
           command: sudo apt-get update
       - run:
           name: install ansible
           command: sudo apt-get install ansible
+
       - checkout
 
       # Download and cache dependencies
