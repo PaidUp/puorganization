@@ -18,9 +18,11 @@ jobs:
 
     steps:
       - run: |
-          sudo sudo apt-get install python python-dev build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev zlib1g-dev python-pip python-setuptools python-virtualenv  &&
-          sudo easy_install pip &&
-          sudo pip install ansible
+          sudo apt-get update &&
+          sudo apt-get install software-properties-common &&
+          sudo apt-add-repository ppa:ansible/ansible &&
+          sudo apt-get update &&
+          sudo apt-get install ansible
       - checkout
 
       # Download and cache dependencies
