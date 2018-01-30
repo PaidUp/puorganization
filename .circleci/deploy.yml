@@ -2,13 +2,7 @@
   remote_user: jenkins
   tasks:
   - name: Pull sources from the repository.
-    shell: pwd
-    register: result
-
-  - debug:
-      msg: msg="{{ result.stdout }}"
-    
-    ## git: 
-    ##  repo: 'git@github.com:PaidUp/PUOrganization.git'
-    ##  dest: /var/lib/jenkins/workspace/Dev_PUOrganization
-    ##  version: develop
+    git: 
+      repo: 'git@github.com:PaidUp/PUOrganization.git'
+      dest: /var/lib/jenkins/workspace/Dev_PUOrganization
+      version: develop
