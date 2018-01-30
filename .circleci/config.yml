@@ -17,10 +17,18 @@ jobs:
     working_directory: ~/repo
 
     steps:
-      - sudo apt-get install software-properties-common
-      - sudo apt-add-repository ppa:ansible/ansible -y
-      - sudo apt-get update
-      - sudo apt-get install ansible
+      - run:
+          name: install common software
+          command: sudo apt-get install software-properties-common
+      - run:
+          name: add repo ansible
+          command: sudo apt-add-repository ppa:ansible/ansible -y
+      - run:
+          name: update software
+          command: sudo apt-get update
+      - run:
+          name: install ansible
+          command: sudo apt-get install ansible
       - checkout
 
       # Download and cache dependencies
