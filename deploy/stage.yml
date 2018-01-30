@@ -18,6 +18,8 @@
     copy:
       src: /var/www/config/stage/PUOrganization/stage.js
       dest: '{{ workspace }}/server/config/environment'
+      force: yes
+      remote_src: yes
       owner: jenkins
       group: jenkins
 
