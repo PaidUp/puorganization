@@ -40,6 +40,8 @@ jobs:
   deploy-develop:
     docker:
       - image: circleci/node:8.9
+    environment:
+      - ANSIBLE_HOST_KEY_CHECKING: false
     working_directory: /tmp/pu-organization  
     steps:
       - run: |
