@@ -6,3 +6,10 @@
       repo: git@github.com:PaidUp/PUOrganization.git
       dest: /var/lib/jenkins/workspace/Dev_PUOrganization
       version: develop
+
+  - name: This command will change t
+    shell: npm install
+    args:
+      chdir: /var/lib/jenkins/workspace/Dev_PUOrganization
+
+ 
