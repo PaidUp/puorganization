@@ -1,7 +1,3 @@
-/**
- * Express configuration
- */
-
 import compression from 'compression'
 import bodyParser from 'body-parser'
 import methodOverride from 'method-override'
