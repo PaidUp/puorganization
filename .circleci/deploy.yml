@@ -6,7 +6,7 @@
     register: result
 
   - debug:
-    msg: msg="{{ result.stdout }}"
+      msg: msg="{{ result.stdout }}"
     
     ## git: 
     ##  repo: 'git@github.com:PaidUp/PUOrganization.git'
