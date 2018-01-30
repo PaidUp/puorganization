@@ -2,11 +2,13 @@ import path from 'path'
 import _ from 'lodash'
 import development from './development'
 import production from './production'
+import stage from './stage'
 import test from './test'
 
 const envs = {
   development,
   production,
+  stage,
   test
 }
 
