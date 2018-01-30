@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - run: |
-          sudo apt-get install build-essential &&
+          sudo sudo apt-get install python-dev build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev zlib1g-dev python-pip &&
           sudo apt-get install python-setuptools &&
           sudo easy_install pip &&
           sudo pip install ansible
