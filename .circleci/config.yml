@@ -50,6 +50,7 @@ jobs:
           sudo apt-add-repository "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" -y &&
           sudo apt-get update &&
           sudo apt-get install ansible
+      - checkout
       - run:
           name: Deploy if tests pass and branch is Staging
           command: ansible-playbook .circleci/deploy.yml -i ./.circleci/develop 
