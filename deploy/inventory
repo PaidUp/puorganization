@@ -1,0 +1,8 @@
+[dev]
+dev.getpaidup.com     ansible_connection=ssh        ansible_user=jenkins
+
+[stg]
+dev.getpaidup.com     ansible_connection=ssh        ansible_user=jenkins
+
+[prod]
+app.getpaidup.com     ansible_connection=ssh        ansible_user=jenkins
