@@ -17,12 +17,6 @@ jobs:
     working_directory: ~/repo
 
     steps:
-      - run: |
-          sudo apt-get update &&
-          sudo apt-get install software-properties-common &&
-          sudo apt-add-repository "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" -y &&
-          sudo apt-get update &&
-          sudo apt-get install ansible
       - checkout
 
       # Download and cache dependencies
@@ -48,6 +42,12 @@ jobs:
       - image: circleci/node:8.9
     working_directory: /tmp/pu-organization  
     steps:
+      - run: |
+          sudo apt-get update &&
+          sudo apt-get install software-properties-common &&
+          sudo apt-add-repository "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" -y &&
+          sudo apt-get update &&
+          sudo apt-get install ansible
       - run:
           name: Deploy if tests pass and branch is Staging
           command: ansible-playbook deploy.yml -i develop 
