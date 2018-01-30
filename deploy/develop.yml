@@ -1,30 +1,27 @@
 - hosts: dev
-  remote_user: jenkins
+  vars:
+    workspace: /var/lib/jenkins/workspace/Dev_PUOrganization
   tasks:
   - name: Pull sources from the repository.
     git: 
       repo: git@github.com:PaidUp/PUOrganization.git
-      dest: /var/lib/jenkins/workspace/Dev_PUOrganization
+      dest: '{{ workspace }}'
       version: develop
       force: yes
 
   - name: install node modules
     shell: npm install
     args:
-      chdir: /var/lib/jenkins/workspace/Dev_PUOrganization
+      chdir: '{{ workspace }}'
 
   - name: NODE | Stop APP
     shell: pm2 stop organization-dev
     args:
-      chdir: /var/lib/jenkins/workspace/Dev_PUOrganization
+      chdir: '{{ workspace }}'
     ignore_errors: yes
 
   - name: NODE | Start APP
     shell: npm run deploy-dev
     args:
-      chdir: /var/lib/jenkins/workspace/Dev_PUOrganization
-    register: myoutput
-
-  - debug: 
-      msg: "{{myoutput.stdout}}"
+      chdir: '{{ workspace }}'
  

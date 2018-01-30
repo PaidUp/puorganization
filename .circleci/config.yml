@@ -37,7 +37,7 @@ jobs:
       - run: yarn test
 
 
-  deploy-develop:
+  deploy:
     docker:
       - image: circleci/node:8.9
     environment:
@@ -51,15 +51,18 @@ jobs:
           sudo apt-get update &&
           sudo apt-get install ansible
       - checkout
+
+  deploy-develop: 
+    steps:
       - run:
           name: Deploy if tests pass and branch is Staging
-          command: ansible-playbook deploy/deploy.yml -i ./deploy/inventory 
+          command: ansible-playbook deploy/develop.yml -i ./deploy/inventory
 
 workflows:
   version: 2
   build-deploy:
     jobs:
-      - build
+      - deploy
       - deploy-develop:
           requires:
             - build
