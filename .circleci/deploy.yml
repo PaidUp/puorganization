@@ -2,7 +2,7 @@
   remote_user: jenkins
   tasks:
   - name: Pull sources from the repository.
-    shell: ls
+    shell: pwd
     ## git: 
     ##  repo: 'git@github.com:PaidUp/PUOrganization.git'
     ##  dest: /var/lib/jenkins/workspace/Dev_PUOrganization
