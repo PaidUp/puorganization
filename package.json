@@ -18,6 +18,7 @@
     "jenkins": "npm test",
     "dev": "cross-env NODE_ENV=development webpack --watch",
     "prod": "cross-env NODE_ENV=production webpack",
+    "deploy-dev": "cross-env NODE_ENV=development webpack && pm2 start dist/build.js --name organization-dev",
     "compile": "babel --source-maps -d compile/ server/"
   },
   "keywords": [

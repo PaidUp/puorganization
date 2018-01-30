@@ -12,11 +12,6 @@
     args:
       chdir: /var/lib/jenkins/workspace/Dev_PUOrganization
 
-  - name: build to production
-    shell: npm run prod
-    args:
-      chdir: /var/lib/jenkins/workspace/Dev_PUOrganization
-
   - name: NODE | Stop APP
     shell: pm2 stop organization-dev
     args:
@@ -24,9 +19,7 @@
     ignore_errors: yes
 
   - name: NODE | Start APP
-    shell: pm2 start dist/build.js --name organization-dev
-    environment:
-      NODE_ENV: development
+    shell: npm run deploy-dev
     args:
       chdir: /var/lib/jenkins/workspace/Dev_PUOrganization
     register: myoutput
