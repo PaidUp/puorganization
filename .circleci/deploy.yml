@@ -7,3 +7,4 @@
            ssh_opts="-o StrictHostKeyChecking=no"
            dest=/var/lib/jenkins/workspace/Dev_PUOrganization
            version=develop
+           clone: no
