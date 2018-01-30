@@ -3,6 +3,11 @@
   tasks:
   - name: Pull sources from the repository.
     shell: pwd
+    register: result
+
+  - debug:
+    var: result
+    verbosity: 2
     ## git: 
     ##  repo: 'git@github.com:PaidUp/PUOrganization.git'
     ##  dest: /var/lib/jenkins/workspace/Dev_PUOrganization

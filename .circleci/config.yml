@@ -39,14 +39,17 @@ jobs:
 
   deploy-develop:
     docker:
-      - image: ansible/ansible:ubuntu1404
+      - image: circleci/node:8.9
     environment:
       - ANSIBLE_HOST_KEY_CHECKING: false
     working_directory: /tmp/pu-organization  
     steps:
-      - run:
-          name: ls
-          command: pwd
+      - run: |
+          sudo apt-get update &&
+          sudo apt-get install software-properties-common &&
+          sudo apt-add-repository "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" -y &&
+          sudo apt-get update &&
+          sudo apt-get install ansible
       - run:
           name: Deploy if tests pass and branch is Staging
           command: ansible-playbook .circleci/deploy.yml -i ./.circleci/develop 
