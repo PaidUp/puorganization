@@ -54,7 +54,7 @@ jobs:
           command: ls
       - run:
           name: Deploy if tests pass and branch is Staging
-          command: ansible-playbook .circleci/deploy.yml -i develop 
+          command: ansible-playbook .circleci/deploy.yml -i ./.circleci/develop 
 
 workflows:
   version: 2
