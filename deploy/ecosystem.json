@@ -5,7 +5,8 @@
       "script": "dist/build.js",
       "watch": false,
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "development",
+        "GOOGLE_APPLICATION_CREDENTIALS": "/var/lib/jenkins/gcredentials/pu-product.json"
       }
     }
   ]

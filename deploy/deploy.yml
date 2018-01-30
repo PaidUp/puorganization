@@ -1,4 +1,4 @@
-- hosts: aws
+- hosts: dev
   remote_user: jenkins
   tasks:
   - name: Pull sources from the repository.
@@ -6,6 +6,7 @@
       repo: git@github.com:PaidUp/PUOrganization.git
       dest: /var/lib/jenkins/workspace/Dev_PUOrganization
       version: develop
+      force: yes
 
   - name: install node modules
     shell: npm install
