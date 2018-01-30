@@ -6,8 +6,8 @@
     register: result
 
   - debug:
-    var: result
-    verbosity: 2
+    msg: msg="{{ result.stdout }}"
+    
     ## git: 
     ##  repo: 'git@github.com:PaidUp/PUOrganization.git'
     ##  dest: /var/lib/jenkins/workspace/Dev_PUOrganization
