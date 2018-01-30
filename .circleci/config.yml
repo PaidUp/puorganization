@@ -21,6 +21,7 @@ jobs:
           sudo sudo apt-get install python-dev build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev zlib1g-dev python-pip &&
           sudo apt-get install python-setuptools &&
           sudo easy_install pip &&
+          pip install --upgrade cffi &&
           sudo pip install ansible
       - checkout
 
