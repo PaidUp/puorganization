@@ -10,7 +10,7 @@ it('POST# / it should create a plan', done => {
   results.plan.payload.productId = results.product.productId
   chai
     .request(server)
-    .post('/api/v1/plan')
+    .post('/api/v1/organization/plan')
     .set('authorization', token)
     .send(results.plan.payload)
     .end((err, res) => {
@@ -25,7 +25,7 @@ it('POST# / it should create a plan', done => {
 it('GET# /:planId it should retrieve a plan', done => {
   chai
     .request(server)
-    .get('/api/v1/plan/' + results.plan.planId)
+    .get('/api/v1/organization/plan/' + results.plan.planId)
     .set('authorization', token)
     .end((err, res) => {
       res.should.have.status(200)
@@ -40,7 +40,7 @@ it('GET# /:planId it should retrieve a plan', done => {
 it('GET# /product/:productId/plans it should retrieve an plan list by product', done => {
   chai
     .request(server)
-    .get('/api/v1/product/' + results.product.productId + '/plans')
+    .get('/api/v1/organization/product/' + results.product.productId + '/plans')
     .set('authorization', token)
     .end((err, res) => {
       res.should.have.status(200)
@@ -53,7 +53,7 @@ it('GET# /product/:productId/plans it should retrieve an plan list by product', 
 it('GET# /product/:productId/plan/:planId it should retrieve a plan by product', done => {
   chai
     .request(server)
-    .get('/api/v1/product/' + results.product.productId + '/plan/' + results.plan.planId)
+    .get('/api/v1/organization/product/' + results.product.productId + '/plan/' + results.plan.planId)
     .set('authorization', token)
     .end((err, res) => {
       res.should.have.status(200)
@@ -68,7 +68,7 @@ it('GET# /product/:productId/plan/:planId it should retrieve a plan by product',
 it('PUT# /:planId it should update a plan', done => {
   chai
     .request(server)
-    .put('/api/v1/plan/'+ results.plan.planId)
+    .put('/api/v1/organization/plan/'+ results.plan.planId)
     .set('authorization', token)
     .send({description: 'Monthly plans updated'})
     .end((err, res) => {

@@ -10,7 +10,7 @@ it('POST# / it should create a product', done => {
   results.product.payload.organizationId = results.organization.organizationId
   chai
     .request(server)
-    .post('/api/v1/product')
+    .post('/api/v1/organization/product')
     .set('authorization', token)
     .send(results.product.payload)
     .end((err, res) => {
@@ -25,7 +25,7 @@ it('POST# / it should create a product', done => {
 it('GET# /:productId it should retrieve a product', done => {
   chai
     .request(server)
-    .get('/api/v1/product/' + results.product.productId)
+    .get('/api/v1/organization/product/' + results.product.productId)
     .set('authorization', token)
     .end((err, res) => {
       res.should.have.status(200)
@@ -68,7 +68,7 @@ it('GET# /organization/:organizationId/product/:productId it should retrieve a p
 it('PUT# /:productId/ it should update a product', done => {
   chai
     .request(server)
-    .put('/api/v1/product/'+ results.product.productId)
+    .put('/api/v1/organization/product/'+ results.product.productId)
     .set('authorization', token)
     .send({image: 'value image url updated'})
     .end((err, res) => {
