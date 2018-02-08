@@ -14,6 +14,11 @@ const formTemplate = {
   required: { type: Boolean, required: true }
 }
 
+const customInfo = {
+  formData: { type: [ formData ], required: true },
+  formTemplate: { type: [ formTemplate ], required: true }
+}
+
 const processingFees = {
   cardFeeActual: { type: Number, required: true },
   cardFeeDisplay: { type: Number, required: true },
@@ -51,10 +56,7 @@ const schema = {
   status: { type: Boolean, required: true, default: true },
   image: { type: String, required: true },
   statementDescriptor: { type: String, required: true },
-  customInfo: {
-    formData: { type: [formData], required: true },
-    formTemplate: { type: [formTemplate], required: true }
-  },
+  customInfo: { type: customInfo },
   processingFees: { type: processingFees, required: true },
   collectionsFee: { type: collectionsFee, required: true },
   paysFees: { type: paysFees, required: true }
