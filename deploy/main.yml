@@ -3,7 +3,7 @@
   vars:
     workspace: /home/ubuntu/PUOrganization
     config: /home/ubuntu/PUOrganizationConfig
-    acceptable_env: ['development', 'stage', 'production']
+    acceptable_env: ['develop', 'stage', 'production']
 
   tasks:
   - fail: msg="unsupported environment"
