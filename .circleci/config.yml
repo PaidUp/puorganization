@@ -42,7 +42,7 @@ jobs:
       - image: circleci/node:8.9
     environment:
       - ANSIBLE_HOST_KEY_CHECKING: false
-    working_directory: /tmp/pu-organization  
+    working_directory: ~/repo
     steps:
       - run: |
           sudo apt-get update &&
@@ -53,7 +53,7 @@ jobs:
       - checkout
       - run:
           name: Deploy if tests pass and branch is develop
-          command: ansible-playbook deploy/develop.yml -i ./deploy/inventory --extra-vars "env=dev"
+          command: ansible-playbook deploy/main.yml -i ./deploy/inventory --extra-vars "env=develop"
 
   deploy-stage:
     docker:
@@ -71,7 +71,7 @@ jobs:
       - checkout
       - run:
           name: Deploy if tests pass and branch is stage
-          command: ansible-playbook deploy/stage.yml -i ./deploy/inventory --extra-vars "env=stg"
+          command: ansible-playbook deploy/main.yml -i ./deploy/inventory --extra-vars "env=stage"
 
 workflows:
   version: 2

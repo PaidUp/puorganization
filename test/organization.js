@@ -35,36 +35,6 @@ it('GET# /:organizationId it should retrieve an organization', done => {
     })
 })
 
-it('PUT# /:organizationId/payment/:paymentId it should update payment id an organization', done => {
-  chai
-    .request(server)
-    .put('/api/v1/organization/' + organizationResults.organizationId + '/payment/paymentIdTest')
-    .set('authorization', token)
-    .end((err, res) => {
-      res.should.have.status(200)
-      res.body.should.have.property('paymentId')
-      res.body.paymentId.should.be.a('string')
-      res.body.paymentId.should.equal('paymentIdTest')
-
-      res.body.should.have.property('verify')
-      res.body.verify.should.be.a('string')
-      res.body.verify.should.equal('done')
-
-      res.body.should.have.property('ownerSSN')
-      res.body.ownerSSN.should.be.a('string')
-      res.body.ownerSSN.should.equal('')
-
-      res.body.should.have.property('aba')
-      res.body.aba.should.be.a('string')
-      res.body.aba.should.equal('')
-
-      res.body.should.have.property('dda')
-      res.body.dda.should.be.a('string')
-      res.body.dda.should.equal('')
-      done()
-    })
-})
-
 it('PUT# /:organizationId it should update an organization', done => {
   chai
     .request(server)
@@ -76,10 +46,6 @@ it('PUT# /:organizationId it should update an organization', done => {
       res.body.should.have.property('website')
       res.body.website.should.be.a('string')
       res.body.website.should.equal('http://teamtest.com')
-
-      res.body.should.have.property('verify')
-      res.body.verify.should.be.a('string')
-      res.body.verify.should.equal('done')
       done()
     })
 })

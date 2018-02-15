@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "organization-stg",
+      "name": "organization",
       "script": "dist/build.js",
       "watch": false,
       "env": {

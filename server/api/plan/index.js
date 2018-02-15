@@ -1,11 +1,11 @@
 import express from 'express'
-import { isAuthenticated } from '@/util'
+import { validate } from '@/util/auth'
 import { PlanController } from '@/controllers'
 
 const router = express.Router()
 
-router.post('/', isAuthenticated, PlanController.save)
-router.get('/:planId', isAuthenticated, PlanController.getById)
-router.put('/:planId', isAuthenticated, PlanController.updateById)
+router.post('/', validate, PlanController.save)
+router.get('/:planId', validate, PlanController.getById)
+router.put('/:planId', validate, PlanController.updateById)
 
 export default router

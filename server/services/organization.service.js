@@ -7,11 +7,8 @@ export default class OrganizationService extends CommonService {
   constructor () {
     super(organizationModel)
   }
-  save (userId, dataOrganization) {
-    dataOrganization.ownerId = userId
-    dataOrganization.aba = Ncryp.encryptField(dataOrganization.aba)
-    dataOrganization.dda = Ncryp.encryptField(dataOrganization.dda)
-    dataOrganization.ownerSSN = Ncryp.encryptField(dataOrganization.ownerSSN)
-    return organizationModel.save(dataOrganization).then(data => data)
+  save (data) {
+    data.keySecret = Ncryp.encryptField(data.keySecret)
+    return organizationModel.save(data).then(org => org)
   }
 }
