@@ -7,7 +7,7 @@ let chai = common.chai
 let results = common.results
 
 it('POST# / it should create a product', done => {
-  results.product.payload.organizationId = results.organization.organizationId
+  results.product.payload.organizationId = results.organization.document._id
   chai
     .request(server)
     .post('/api/v1/organization/product')
@@ -40,7 +40,7 @@ it('GET# /:productId it should retrieve a product', done => {
 it('GET# /organization/:organizationId/products it should retrieve a product list by organization', done => {
   chai
     .request(server)
-    .get('/api/v1/organization/' + results.organization.organizationId + '/products')
+    .get('/api/v1/organization/' + results.organization.document._id + '/products')
     .set('authorization', token)
     .end((err, res) => {
       res.should.have.status(200)
@@ -53,12 +53,12 @@ it('GET# /organization/:organizationId/products it should retrieve a product lis
 it('GET# /organization/:organizationId/product/:productId it should retrieve a product by organization', done => {
   chai
     .request(server)
-    .get('/api/v1/organization/' + results.organization.organizationId + '/product/' + results.product.productId)
+    .get('/api/v1/organization/' + results.organization.document._id + '/product/' + results.product.productId)
     .set('authorization', token)
     .end((err, res) => {
       res.should.have.status(200)
       res.body.should.have.property('_id')
-      res.body.paymentId.should.be.a('string')
+      res.body._id.should.be.a('string')
       res.body._id.should.equal(results.product.productId)
       results.product.document = res.body
       done()
@@ -74,7 +74,7 @@ it('PUT# /:productId/ it should update a product', done => {
     .end((err, res) => {
       res.should.have.status(200)
       res.body.should.have.property('image')
-      res.body.paymentId.should.be.a('string')
+      res.body.image.should.be.a('string')
       res.body.image.should.equal('value image url updated')
 
       done()

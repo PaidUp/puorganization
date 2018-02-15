@@ -1,5 +1,12 @@
 import CommonModel from './common.model'
 
+const season = {
+  name: { type: String, required: true },
+  start: { type: Date },
+  end: { type: Date },
+  status: { type: [String], required: true, enum: ['active', 'inactive'] }
+}
+
 const schema = {
   connectAccount: { type: String, required: true },
   ownerFirstName: { type: String, required: true },
@@ -14,12 +21,12 @@ const schema = {
   zipCode: { type: String, required: true },
   address: { type: String, required: true },
   address2: { type: String },
-  buisnessUrl: { type: String, default: '' },
+  businessUrl: { type: String, default: '' },
   businessName: { type: String, required: true },
   type: { type: String, required: true },
   keySecret: { type: String, required: true },
   keyPublic: { type: String, required: true },
-  seasons: { type: [String], default: [] },
+  seasons: { type: [season], default: [] },
   status: { type: [String], required: true, enum: ['active', 'inactive'] }
 }
 

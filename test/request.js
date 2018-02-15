@@ -60,6 +60,9 @@ it('PUT# /:id/approve it should update an organization', done => {
       res.body.should.have.property('status')
       res.body.status.should.be.a('string')
       res.body.status.should.equal('approved')
+      res.body.should.have.property('organizationId')
+      res.body.organizationId.should.be.a('string')
+      requestResults.document = res.body
       done()
     })
 })

@@ -59,19 +59,15 @@ results.organization.payload = {
 }
 
 results.product.payload = {
-  connectAccount: 'acct_18OZ8zIhv1Yesxk9',
   season: 'test',
-  organizationId: '57b6139811627b1d0ddbee30',
-  organizationName: 'Cobras Volleyball Club',
-  organizationLocation: 'San Antonio, TX',
-  sku: 'TX - SAN ANTONIO - COBRAS VOLLEYBALL - 17 BLACK PREMIER 2016',
+  sku: 'TX - SAN ANTONIO - COBRAS VOLLEYBALL - 17 BLACK PREMIER 2016',  
   name: '17 Black (Premier)',
+  description: 'Cobras Volleyball Club',
+  organizationLocation: 'San Antonio, TX',
   description: '17 Black (Premier)',
-  location: 'San Antonio, TX',
-  visibility: true,
-  status: true,
-  image: 'value image url',
-  statementDescriptor: 'PaidUp Cobras 17 Black',
+  image: 'value image url',  
+  statementDescriptor: 'PaidUp Cobras 17 Black',  
+  status: 'active',
   customInfo: {
     formData: [],
     formTemplate: [
@@ -94,22 +90,17 @@ results.product.payload = {
     ]
   },
   processingFees: {
-    cardFeeActual: 2.9,
-    cardFeeDisplay: 2.9,
-    cardFeeFlatActual: 0.3,
-    cardFeeFlatDisplay: 0.3,
-    achFeeActual: 0.8,
-    achFeeDisplay: 2.3,
-    achFeeFlatActual: 0,
-    achFeeFlatDisplay: 0,
-    achFeeCapActual: 0.25,
-    achFeeCapDisplay: 5
+    cardFee: 2.9,
+    cardFeeFlat: 0.3,
+    achFee: 2.3,
+    achFeeFlat: 0,
+    achFeeCap: 5
   },
-  collectionsFee: {
+  collectionFees: {
     fee: 3.5,
     feeFlat: 0
   },
-  paysFees: {
+  payFees: {
     processing: true,
     collections: true
   }

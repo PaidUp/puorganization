@@ -101,7 +101,7 @@ export default class RequestService extends CommonService {
           request.keyPublic = data.keys.publishable
           let organization = buildOrganizationPayload(request)
           organizationService.save(organization).then(data => {
-            requestModel.updateById(id, {status: 'approved'})
+            requestModel.updateById(id, {organizationId: data._id, status: 'approved'})
               .then(reqApproved => resolve(reqApproved))
               .catch(reason => reject(reason))
           })

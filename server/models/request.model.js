@@ -2,6 +2,7 @@ import CommonModel from './common.model'
 
 const schema = {
   userId: { type: String, required: true },
+  organizationId: { type: String },
   ownerFirstName: { type: String, required: true },
   ownerLastName: { type: String, required: true },
   image: { type: String, required: true },

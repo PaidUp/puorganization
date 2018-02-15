@@ -3,7 +3,6 @@ import { validate } from '@/util/auth'
 import { OrganizationController, ProductController } from '@/controllers'
 
 const router = express.Router()
-router.post('/', validate, OrganizationController.save)
 router.put('/:organizationId', validate, OrganizationController.updateById)
 router.get('/:organizationId', validate, OrganizationController.getById)
 
