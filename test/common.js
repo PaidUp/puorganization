@@ -111,54 +111,37 @@ results.plan.payload = {
   description: 'Monthly Payments',
   paymentMethods: ['card'],
   visible: true,
+  status: 'active',
   dues: [
     {
-      version: 'v2',
       description: 'Deposit',
       dateCharge: '2017-01-01 10:00',
       amount: 500.0,
-      discount: 0,
-      applyDiscount: false
     },
     {
-      version: 'v2',
       description: 'Payment 1 of 5',
       dateCharge: '2017-09-01 10:00',
       amount: 500.0,
-      discount: 0,
-      applyDiscount: false
     },
     {
-      version: 'v2',
       description: 'Payment 2 of 5',
       dateCharge: '2017-10-01 10:00',
       amount: 450.0,
-      discount: 0,
-      applyDiscount: false
     },
     {
-      version: 'v2',
       description: 'Payment 3 of 5',
       dateCharge: '2017-11-01 10:00',
       amount: 400.0,
-      discount: 0,
-      applyDiscount: false
     },
     {
-      version: 'v2',
       description: 'Payment 4 of 5',
       dateCharge: '2017-12-01 10:00',
       amount: 300.0,
-      discount: 0,
-      applyDiscount: false
     },
     {
-      version: 'v2',
       description: 'Payment 5 of 5',
       dateCharge: '2017-01-01 10:00',
       amount: 100.0,
-      discount: 0,
-      applyDiscount: false
     }
   ]
 }
