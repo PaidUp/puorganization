@@ -34,6 +34,17 @@ export default class PlanController {
     })
   }
 
+  static join (req, res) {
+    let hr = new HandlerResponse(res)
+    const planId = req.params.planId
+    planService.join(planId).then(result => {
+      hr.send(result)
+    }).catch(reason => {
+      console.log('REASon:', reason)
+      hr.error(reason)
+    })
+  }
+
   static getListByProductId (req, res) {
     let hr = new HandlerResponse(res)
     const productId = req.params.productId

@@ -11,4 +11,13 @@ export default class OrganizationService extends CommonService {
     data.keySecret = Ncryp.encryptField(data.keySecret)
     return organizationModel.save(data).then(org => org)
   }
+
+  getById (entityId) {
+    return organizationModel.findById(entityId).then(entity => {
+      entity = entity.toObject()
+      delete entity.keyPublic
+      delete entity.keySecret
+      return entity
+    })
+  }
 }

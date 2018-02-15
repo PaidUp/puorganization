@@ -37,6 +37,24 @@ it('GET# /:planId it should retrieve a plan', done => {
     })
 })
 
+it('GET# /:planId/join it should retrieve a plan with dependences', done => {
+  chai
+    .request(server)
+    .get('/api/v1/organization/plan/' + results.plan.planId + '/join')
+    .set('authorization', token)
+    .end((err, res) => {
+      res.should.have.status(200)
+      console.log(res.body)
+      res.body.should.have.property('plan')
+      res.body.should.have.property('product')
+      res.body.should.have.property('organization')
+      res.body.plan._id.should.be.a('string')
+      res.body.product._id.should.be.a('string')
+      res.body.organization._id.should.be.a('string')
+      done()
+    })
+})
+
 it('GET# /product/:productId/plans it should retrieve an plan list by product', done => {
   chai
     .request(server)
