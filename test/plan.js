@@ -44,7 +44,6 @@ it('GET# /:planId/join it should retrieve a plan with dependences', done => {
     .set('authorization', token)
     .end((err, res) => {
       res.should.have.status(200)
-      console.log(res.body)
       res.body.should.have.property('plan')
       res.body.should.have.property('product')
       res.body.should.have.property('organization')

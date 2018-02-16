@@ -27,7 +27,7 @@ const processingFees = {
   achFeeCap: { type: Number, required: true }
 }
 
-const collectionsFee = {
+const collectFees = {
   fee: { type: Number, required: true },
   feeFlat: { type: Number, required: true }
 }
@@ -48,7 +48,7 @@ const schema = {
   status: { type: String, required: true, enum: ['active', 'inactive'] },
   customInfo: { type: customInfo },
   processingFees: { type: processingFees, required: true },
-  collectionFees: { type: collectionsFee, required: true },
+  collectFees: { type: collectFees, required: true },
   payFees: { type: payFees, required: true }
 }
 

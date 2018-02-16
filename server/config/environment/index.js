@@ -45,7 +45,18 @@ let all = {
     logName: 'pu-product-dev-log',
     metadata: {resource: {type: 'global'}}
   },
-  encryptKey: 'PZ3oXv2v6Pq5HAPFI9NFbQ=='
+  encryptKey: 'PZ3oXv2v6Pq5HAPFI9NFbQ==',
+  collectFees: {
+    fee: 5,
+    feeFlat: 0
+  },
+  processingFees: {
+    cardFee: 2.9,
+    cardFeeFlat: 3,
+    achFee: 0.8,
+    achFeeFlat: 0,
+    achFeeCap: 5
+  }
 }
 
 if (process.env.NODE_ENV) {

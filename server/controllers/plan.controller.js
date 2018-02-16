@@ -15,9 +15,9 @@ export default class PlanController {
 
   static updateById (req, res) {
     let hr = new HandlerResponse(res)
-    const payment = req.body
+    const plan = req.body
     const planId = req.params.planId
-    planService.updateById(planId, payment).then(result => {
+    planService.updateById(planId, plan).then(result => {
       hr.send(result)
     }).catch(reason => {
       hr.error(reason)
@@ -49,7 +49,7 @@ export default class PlanController {
     let hr = new HandlerResponse(res)
     const productId = req.params.productId
     if (!productId) {
-      return hr.error('organizationId is required', 422)
+      return hr.error('productId is required', 422)
     }
     planService.find({productId}).then(result => {
       hr.send(result)
