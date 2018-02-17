@@ -100,7 +100,7 @@ results.product.payload = {
   },
   payFees: {
     processing: true,
-    collections: true
+    collect: true
   }
 }
 

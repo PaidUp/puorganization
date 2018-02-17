@@ -34,7 +34,7 @@ const collectFees = {
 
 const payFees = {
   processing: { type: Boolean, required: true },
-  collections: { type: Boolean, required: true }
+  collect: { type: Boolean, required: true }
 }
 
 const schema = {
