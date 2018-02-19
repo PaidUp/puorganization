@@ -1,6 +1,6 @@
 import { RequestModel } from '@/models'
 import CommonService from './common.service'
-import { Ncryp, Stripe } from '@/util'
+import { Ncryp, Stripe } from 'pu-common'
 import OrganizationService from './organization.service'
 const requestModel = new RequestModel()
 const organizationService = new OrganizationService()

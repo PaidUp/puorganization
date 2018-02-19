@@ -1,77 +1,71 @@
 import { PlanService } from '@/services'
-import { HandlerResponse } from '@/util'
+import { HandlerResponse } from 'pu-common'
 const planService = new PlanService()
 
 export default class PlanController {
   static save (req, res) {
-    let hr = new HandlerResponse(res)
     const payment = req.body
     planService.save(payment).then(result => {
-      hr.send(result)
+      HandlerResponse.send(res, result)
     }).catch(reason => {
-      hr.error(reason)
+      HandlerResponse.error(res, reason)
     })
   }
 
   static updateById (req, res) {
-    let hr = new HandlerResponse(res)
     const plan = req.body
     const planId = req.params.planId
     planService.updateById(planId, plan).then(result => {
-      hr.send(result)
+      HandlerResponse.send(res, result)
     }).catch(reason => {
-      hr.error(reason)
+      HandlerResponse.error(res, reason)
     })
   }
 
   static getById (req, res) {
-    let hr = new HandlerResponse(res)
     const planId = req.params.planId
     planService.getById(planId).then(result => {
-      hr.send(result)
+      HandlerResponse.send(res, result)
     }).catch(reason => {
-      hr.error(reason)
+      HandlerResponse.error(res, reason)
     })
   }
 
   static join (req, res) {
-    let hr = new HandlerResponse(res)
     const planId = req.params.planId
     planService.join(planId).then(result => {
-      hr.send(result)
+      HandlerResponse.send(res, result)
     }).catch(reason => {
       console.log('REASon:', reason)
-      hr.error(reason)
+      HandlerResponse.error(res, reason)
     })
   }
 
   static getListByProductId (req, res) {
-    let hr = new HandlerResponse(res)
     const productId = req.params.productId
     if (!productId) {
-      return hr.error('productId is required', 422)
+      return HandlerResponse.error(res, 'productId is required', 422)
     }
     planService.find({productId}).then(result => {
-      hr.send(result)
+      HandlerResponse.send(res, result)
     }).catch(reason => {
-      hr.error(reason)
+      HandlerResponse.error(res, reason)
     })
   }
 
   static getByProductId (req, res) {
-    let hr = new HandlerResponse(res)
     const productId = req.params.productId
     const planId = req.params.planId
     if (!planId) {
-      return hr.error('planId is required', 422)
+      return HandlerResponse.error(res, 'planId is required', 422)
     }
     if (!productId) {
-      return hr.error('productId is required', 422)
+      return HandlerResponse.error(res, 'productId is required', 422)
     }
     planService.getByIdAndFilter(planId, {productId}).then(result => {
-      hr.send(result)
+      HandlerResponse.send(res, result)
     }).catch(reason => {
-      hr.error(reason)
+      HandlerResponse.error(res, reason)
     })
   }
 }

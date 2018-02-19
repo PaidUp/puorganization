@@ -1,6 +1,6 @@
 import { OrganizationModel } from '@/models'
 import CommonService from './common.service'
-import { Ncryp } from '@/util'
+import { Ncryp } from 'pu-common'
 const organizationModel = new OrganizationModel()
 
 export default class OrganizationService extends CommonService {
