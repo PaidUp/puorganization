@@ -1,14 +1,20 @@
 import { PlanModel } from '@/models'
 import CommonService from './common.service'
-import ProductService from './product.service'
-import OrganizationService from './organization.service'
+import productService from './product.service'
+import organizationService from './organization.service'
 const planModel = new PlanModel()
-const productService = new ProductService()
-const organizationService = new OrganizationService()
+let paymentService
 
-export default class PaymentService extends CommonService {
+class PaymentService extends CommonService {
   constructor () {
     super(planModel)
+  }
+
+  static get instance () {
+    if (!paymentService) {
+      paymentService = new PaymentService()
+    }
+    return paymentService
   }
 
   join (planId) {
@@ -25,3 +31,5 @@ export default class PaymentService extends CommonService {
     })
   }
 }
+
+export default PaymentService.instance

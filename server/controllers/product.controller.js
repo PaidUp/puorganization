@@ -1,6 +1,5 @@
-import { ProductService } from '@/services'
+import { productService } from '@/services'
 import { HandlerResponse } from 'pu-common'
-const productService = new ProductService()
 
 export default class ProductController {
   static save (req, res) {

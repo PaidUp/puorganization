@@ -1,6 +1,5 @@
-import { RequestService } from '@/services'
+import { requestService } from '@/services'
 import { HandlerResponse } from 'pu-common'
-const requestService = new RequestService()
 
 export default class RequestCotroller {
   static save (req, res) {

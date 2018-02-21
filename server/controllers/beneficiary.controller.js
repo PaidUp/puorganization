@@ -1,6 +1,5 @@
-import { BeneficiaryService } from '@/services'
+import { beneficiaryService } from '@/services'
 import { HandlerResponse } from 'pu-common'
-const beneficiaryService = new BeneficiaryService()
 
 export default class BeneficiaryController {
   static save (req, res) {

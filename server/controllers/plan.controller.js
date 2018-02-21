@@ -1,6 +1,5 @@
-import { PlanService } from '@/services'
+import { planService } from '@/services'
 import { HandlerResponse } from 'pu-common'
-const planService = new PlanService()
 
 export default class PlanController {
   static save (req, res) {

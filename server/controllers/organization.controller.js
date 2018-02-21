@@ -1,6 +1,5 @@
-import { OrganizationService } from '@/services'
+import { organizationService } from '@/services'
 import { HandlerResponse } from 'pu-common'
-const organizationService = new OrganizationService()
 
 export default class OrganizationCotroller {
   static updateById (req, res) {

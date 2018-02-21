@@ -1,10 +1,10 @@
 import { RequestModel } from '@/models'
 import CommonService from './common.service'
 import { Ncryp, Stripe } from 'pu-common'
-import OrganizationService from './organization.service'
+import organizationService from './organization.service'
 const requestModel = new RequestModel()
-const organizationService = new OrganizationService()
 const stripe = new Stripe('sk_test_wE4QBHe2SZH9wZ6uMZliup0g')
+let requestService
 
 function buildConnectAccountPayload (request) {
   return {
@@ -70,10 +70,18 @@ function buildOrganizationPayload (request) {
   }
 }
 
-export default class RequestService extends CommonService {
+class RequestService extends CommonService {
   constructor () {
     super(requestModel)
   }
+
+  static get instance () {
+    if (!requestService) {
+      requestService = new RequestService()
+    }
+    return requestService
+  }
+
   save (userId, data) {
     data.userId = userId
     data.routingNumber = Ncryp.encryptField(data.routingNumber)
@@ -110,3 +118,5 @@ export default class RequestService extends CommonService {
     })
   }
 }
+
+export default RequestService.instance
