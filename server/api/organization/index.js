@@ -1,15 +1,15 @@
 import express from 'express'
-import { Auth } from 'pu-common'
+import { auth } from 'pu-common'
 import { OrganizationController, ProductController, BeneficiaryController } from '@/controllers'
 
 const router = express.Router()
-router.put('/:organizationId', Auth.validate, OrganizationController.updateById)
-router.get('/:organizationId', Auth.validate, OrganizationController.getById)
+router.put('/:organizationId', auth.validate, OrganizationController.updateById)
+router.get('/:organizationId', auth.validate, OrganizationController.getById)
 
-router.get('/:organizationId/products', Auth.validate, ProductController.getListByOrganizationId)
-router.get('/:organizationId/product/:productId', Auth.validate, ProductController.getByOrganizationId)
+router.get('/:organizationId/products', auth.validate, ProductController.getListByOrganizationId)
+router.get('/:organizationId/product/:productId', auth.validate, ProductController.getByOrganizationId)
 
-router.get('/:organizationId/beneficiaries', Auth.validate, BeneficiaryController.getListByOrganizationId)
-router.get('/:organizationId/beneficiary/:beneficiaryId', Auth.validate, BeneficiaryController.getByOrganizationId)
+router.get('/:organizationId/beneficiaries', auth.validate, BeneficiaryController.getListByOrganizationId)
+router.get('/:organizationId/beneficiary/:beneficiaryId', auth.validate, BeneficiaryController.getByOrganizationId)
 
 export default router

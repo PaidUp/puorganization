@@ -1,14 +1,14 @@
 import express from 'express'
-import { Auth } from 'pu-common'
+import { auth } from 'pu-common'
 import { ProductController, PlanController } from '@/controllers'
 
 const router = express.Router()
 
-router.post('/', Auth.validate, ProductController.save)
-router.get('/:productId', Auth.validate, ProductController.getById)
-router.put('/:productId', Auth.validate, ProductController.updateById)
+router.post('/', auth.validate, ProductController.save)
+router.get('/:productId', auth.validate, ProductController.getById)
+router.put('/:productId', auth.validate, ProductController.updateById)
 
-router.get('/:productId/plans', Auth.validate, PlanController.getListByProductId)
-router.get('/:productId/plan/:planId', Auth.validate, PlanController.getByProductId)
+router.get('/:productId/plans', auth.validate, PlanController.getListByProductId)
+router.get('/:productId/plan/:planId', auth.validate, PlanController.getByProductId)
 
 export default router
