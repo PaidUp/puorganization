@@ -13,6 +13,10 @@ export default class CommonModel {
     )
   }
 
+  get bulk () {
+    return this.Model.collection.initializeUnorderedBulkOp()
+  }
+
   save (pp) {
     return new Promise((resolve, reject) => {
       try {

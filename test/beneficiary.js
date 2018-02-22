@@ -79,3 +79,18 @@ it('GET# /organization/:organizationId/beneficiary/:beneficiaryId it should retr
       done()
     })
 })
+
+it('POST# / it should import beneficiaries', done => {
+  for (let beneficiary of results.beneficiary.imports) {
+    beneficiary.organizationId = results.organization.document._id
+  }
+  chai
+    .request(server)
+    .post('/api/v1/organization/beneficiary/import')
+    .set('x-api-key', 'JF06f7FJjTDkNOcM1sdywWw5CZBHW4Jy')
+    .send(results.beneficiary.imports)
+    .end((err, res) => {
+      res.should.have.status(200)
+      done()
+    })
+})

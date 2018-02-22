@@ -2,7 +2,6 @@ process.env.NODE_ENV = 'test'
 
 let common = require('./common')
 let server = common.server
-let token = common.token
 let chai = common.chai
 
 function importTest(name, path) {
@@ -38,5 +37,5 @@ describe('loading express', function () {
   importTest('organization: /api/v1/organization ', './organization');
   importTest('product: /api/v1/organization/product ', './product');
   importTest('payment: /api/v1/organization/plan ', './plan');
-  importTest('bebeficiary: /api/v1/organization/beneficiary ', './beneficiary');
+  importTest('beneficiary: /api/v1/organization/beneficiary ', './beneficiary');
 })

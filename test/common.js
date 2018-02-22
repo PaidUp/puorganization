@@ -152,6 +152,12 @@ results.beneficiary.payload = {
   status: 'active',
 }
 
+results.beneficiary.imports = [
+  { organizationId: 'xxx', firstName: 'testFirsName1', lastName: 'testLastName1' },
+  { organizationId: 'xxx', firstName: 'testFirsName2', lastName: 'testLastName2' },
+  { organizationId: 'xxx', firstName: 'testFirsName3', lastName: 'testLastName3' }
+]
+
 chai.use(chaiHttp)
 
 exports.chai = chai

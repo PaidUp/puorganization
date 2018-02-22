@@ -5,6 +5,11 @@ export default class CommonService {
   constructor (model) {
     this.model = model
   }
+
+  get bulk () {
+    return this.model.bulk
+  }
+
   save (entity) {
     return this.model.save(entity).then(entity => entity)
   }

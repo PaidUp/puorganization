@@ -1,19 +1,29 @@
 import { BeneficiaryModel } from '@/models'
 import CommonService from './common.service'
-const beneficiaryModel = new BeneficiaryModel()
-let paymentService
 
 class PaymentService extends CommonService {
   constructor () {
-    super(beneficiaryModel)
+    super(new BeneficiaryModel())
   }
 
-  static get instance () {
-    if (!paymentService) {
-      paymentService = new PaymentService()
-    }
-    return paymentService
+  import (beneficiaries) {
+    return new Promise((resolve, reject) => {
+      try {
+        const bulk = this.bulk
+        for (let { organizationId, firstName, lastName } of beneficiaries) {
+          const key = `${organizationId.toLowerCase().trim()}_${firstName.toLowerCase().trim()}_${lastName.toLowerCase().trim()}`
+          bulk.find({ key }).upsert().updateOne(
+            { organizationId, firstName, lastName, key, type: 'athlete', status: 'active' }
+          )
+        }
+        bulk.execute(res => resolve(res))
+      } catch (err) {
+        reject(err)
+      }
+    })
   }
 }
 
-export default PaymentService.instance
+let paymentService = new PaymentService()
+
+export default paymentService

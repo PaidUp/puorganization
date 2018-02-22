@@ -6,7 +6,7 @@ const schema = {
   type: { type: String, required: true, enum: ['athlete'] },
   name: { type: String, required: true },
   description: { type: String },
-  status: { type: String, required: true, enum: ['active', 'inactive'] }
+  status: { type: String, required: true, enum: ['active', 'inactive'], default: 'active' }
 }
 
 export default class BeneficiaryModel extends CommonModel {
