@@ -20,7 +20,6 @@ export default class CommonModel {
   save (pp) {
     return new Promise((resolve, reject) => {
       try {
-        pp.updateOn(Date.now())
         let paymentPlan = new this.Model(pp)
         paymentPlan.save((err, data) => {
           if (err) {
