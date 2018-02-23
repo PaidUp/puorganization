@@ -26,6 +26,12 @@ export default class CommonService {
     return this.model.find(filter).then(entities => entities)
   }
 
+  findOneAndUpdate (conditions, update, options) {
+    return this.model.findOneAndUpdate(conditions, update, options).then(entities => {
+      return entities
+    })
+  }
+
   getByIdAndFilter (id, values) {
     values._id = new ObjectId(id)
     return this.model.findOne(values).then(entity => entity)

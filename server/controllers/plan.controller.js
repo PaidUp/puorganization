@@ -35,7 +35,6 @@ export default class PlanController {
     planService.join(planId).then(result => {
       HandlerResponse.send(res, result)
     }).catch(reason => {
-      console.log('REASon:', reason)
       HandlerResponse.error(res, reason)
     })
   }

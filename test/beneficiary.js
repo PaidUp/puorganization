@@ -22,7 +22,7 @@ it('POST# / it should create a beneficiary', done => {
     })
 })
 
-it('GET# /:bebeficiaryId it should retrieve a beneficiary', done => {
+it('GET# /:beneficiaryId it should retrieve a beneficiary', done => {
   chai
     .request(server)
     .get('/api/v1/organization/beneficiary/' + results.beneficiary.beneficiaryId)

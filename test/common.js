@@ -145,17 +145,18 @@ results.plan.payload = {
 }
 
 results.beneficiary.payload = {
-  key: 'john_doe_jr',
   type: 'athlete',
-  name: 'John Doe Jr',
+  firstName: 'John Doe Jr',
+  lastName: 'John Doe Jr',
   description: 'some description',
   status: 'active',
+  assigneesEmail: 'test@test.com'
 }
 
 results.beneficiary.imports = [
-  { organizationId: 'xxx', firstName: 'testFirsName1', lastName: 'testLastName1' },
-  { organizationId: 'xxx', firstName: 'testFirsName2', lastName: 'testLastName2' },
-  { organizationId: 'xxx', firstName: 'testFirsName3', lastName: 'testLastName3' }
+  { organizationId: 'xxx', firstName: 'testFirsName1', lastName: 'testLastName1', assigneesEmail: 'email@test.com1' },
+  { organizationId: 'xxx', firstName: 'testFirsName2', lastName: 'testLastName2', assigneesEmail: 'email@test.com1' },
+  { organizationId: 'xxx', firstName: 'testFirsName3', lastName: 'testLastName3', assigneesEmail: 'email@test.com1' }
 ]
 
 chai.use(chaiHttp)

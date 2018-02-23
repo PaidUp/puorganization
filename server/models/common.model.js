@@ -20,6 +20,7 @@ export default class CommonModel {
   save (pp) {
     return new Promise((resolve, reject) => {
       try {
+        pp.updateOn(Date.now())
         let paymentPlan = new this.Model(pp)
         paymentPlan.save((err, data) => {
           if (err) {
@@ -37,6 +38,19 @@ export default class CommonModel {
     return new Promise((resolve, reject) => {
       try {
         this.Model.find(filter, (err, data) => {
+          if (err) return reject(err)
+          resolve(data)
+        })
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  findOneAndUpdate (conditions, update, options) {
+    return new Promise((resolve, reject) => {
+      try {
+        this.Model.findOneAndUpdate(conditions, update, options, (err, data) => {
           if (err) return reject(err)
           resolve(data)
         })

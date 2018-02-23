@@ -3,8 +3,22 @@ import { HandlerResponse as hr } from 'pu-common'
 
 export default class BeneficiaryController {
   static save (req, res) {
-    const beneficiary = req.body
-    beneficiaryService.save(beneficiary).then(result => {
+    let beneficiary = {
+      organizationId: req.body.organizationId,
+      type: req.body.type,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      description: req.body.description,
+      status: req.body.status
+    }
+    let upd = {
+      $set: beneficiary
+    }
+    if (req.body.assigneesEmail) {
+      upd.$addToSet = { assigneesEmail: req.body.assigneesEmail }
+    }
+    beneficiary.key = `${beneficiary.organizationId.toLowerCase().trim()}_${beneficiary.firstName.toLowerCase().trim()}_${beneficiary.lastName.toLowerCase().trim()}`
+    beneficiaryService.findOneAndUpdate({ key: beneficiary.key }, upd, { upsert: true, new: true }).then(result => {
       hr.send(res, result)
     }).catch(reason => {
       hr.error(res, reason)
@@ -63,7 +77,6 @@ export default class BeneficiaryController {
     beneficiaryService.import(beneficiaries).then(data => {
       hr.send(res, data)
     }).catch(reason => {
-      console.log('res: ', reason)
       hr.error(res, reason)
     })
   }
