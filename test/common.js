@@ -112,8 +112,9 @@ results.plan.payload = {
   status: 'active',
   dues: [
     {
-      description: 'Deposit',
+      description: 'Deposit 1',
       dateCharge: '2017-01-01 10:00',
+      maxDateCharge: '2017-01-15 10:00',
       amount: 500.0
     },
     {

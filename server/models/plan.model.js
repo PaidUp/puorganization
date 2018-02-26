@@ -3,6 +3,7 @@ import CommonModel from './common.model'
 const dues = {
   description: { type: String, required: true },
   dateCharge: { type: Date, required: true },
+  maxDateCharge: { type: Date },
   amount: { type: Number, required: true }
 }
 
