@@ -2,7 +2,6 @@ import { PlanModel } from '@/models'
 import CommonService from './common.service'
 import productService from './product.service'
 import organizationService from './organization.service'
-const planModel = new PlanModel()
 
 class PaymentService extends CommonService {
   constructor () {
@@ -11,7 +10,7 @@ class PaymentService extends CommonService {
 
   join (planId) {
     return new Promise((resolve, reject) => {
-      planModel.findById(planId).then(plan => {
+      this.model.findById(planId).then(plan => {
         productService.getById(plan.productId).then(product => {
           organizationService.getById(product.organizationId).then(organization => {
             resolve({
