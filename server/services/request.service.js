@@ -2,7 +2,6 @@ import { RequestModel } from '@/models'
 import CommonService from './common.service'
 import { Ncryp, Stripe } from 'pu-common'
 import organizationService from './organization.service'
-const requestModel = new RequestModel()
 const stripe = new Stripe('sk_test_wE4QBHe2SZH9wZ6uMZliup0g')
 let requestService
 
@@ -72,14 +71,7 @@ function buildOrganizationPayload (request) {
 
 class RequestService extends CommonService {
   constructor () {
-    super(requestModel)
-  }
-
-  static get instance () {
-    if (!requestService) {
-      requestService = new RequestService()
-    }
-    return requestService
+    super(new RequestModel())
   }
 
   save (userId, data) {
@@ -87,14 +79,14 @@ class RequestService extends CommonService {
     data.routingNumber = Ncryp.encryptField(data.routingNumber)
     data.accountNumber = Ncryp.encryptField(data.accountNumber)
     data.ownerSSN = Ncryp.encryptField(data.ownerSSN)
-    return requestModel.save(data).then(data => data)
+    return this.model.save(data).then(data => data)
   }
 
   updateById (id, data) {
     if (data.routingNumber) data.routingNumber = Ncryp.encryptField(data.routingNumber)
     if (data.accountNumber) data.accountNumber = Ncryp.encryptField(data.accountNumber)
     if (data.ownerSSN) data.ownerSSN = Ncryp.encryptField(data.ownerSSN)
-    return requestModel.updateById(id, data).then(data => data)
+    return this.model.updateById(id, data).then(data => data)
   }
 
   approve (id) {
@@ -109,7 +101,7 @@ class RequestService extends CommonService {
           request.keyPublic = data.keys.publishable
           let organization = buildOrganizationPayload(request)
           organizationService.save(organization).then(data => {
-            requestModel.updateById(id, {organizationId: data._id, status: 'approved'})
+            this.model.updateById(id, {organizationId: data._id, status: 'approved'})
               .then(reqApproved => resolve(reqApproved))
               .catch(reason => reject(reason))
           })
@@ -119,4 +111,6 @@ class RequestService extends CommonService {
   }
 }
 
-export default RequestService.instance
+requestService = new RequestService()
+
+export default requestService
