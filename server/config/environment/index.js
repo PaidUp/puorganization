@@ -54,6 +54,11 @@ let all = {
     achFee: 0.8,
     achFeeFlat: 0,
     achFeeCap: 5
+  },
+  api: {
+    payment: {
+      url: 'http://localhost:9004/api/v1/payment'
+    }
   }
 }
 

@@ -1,12 +1,44 @@
 import { RequestModel } from '@/models'
 import CommonService from './common.service'
-import { Ncryp, Stripe } from 'pu-common'
+import { Ncryp } from 'pu-common'
 import organizationService from './organization.service'
-const stripe = new Stripe('sk_test_wE4QBHe2SZH9wZ6uMZliup0g')
-let requestService
+import config from '@/config/environment'
+import axios from 'axios'
 
-function buildConnectAccountPayload (request) {
+let requestService
+let apiPayment = axios.create({
+  baseURL: config.api.payment.url,
+  timeout: 10000,
+  headers: {'x-api-key': config.auth.key}
+})
+
+function buildOrganizationPayload (request) {
   return {
+    connectAccount: request.connectAccount,
+    ownerFirstName: request.ownerFirstName,
+    ownerLastName: request.ownerLastName,
+    ownerDOB: request.ownerDOB,
+    image: request.image,
+    ownerEmail: request.ownerEmail,
+    ownerPhone: request.ownerPhone,
+    state: request.state,
+    city: request.state,
+    zipCode: request.zipCode,
+    address: request.address,
+    address2: request.address2,
+    businessName: request.businessName,
+    type: request.type,
+    seasons: [],
+    businessUrl: request.businessUrl,
+    country: request.country,
+    keySecret: request.keySecret,
+    keyPublic: request.keyPublic,
+    status: 'active'
+  }
+}
+
+function createConnectAccount (request) {
+  const payload = {
     type: 'custom',
     country: 'US',
     email: request.ownerEmail,
@@ -42,31 +74,16 @@ function buildConnectAccountPayload (request) {
       currency: 'usd'
     }
   }
-}
 
-function buildOrganizationPayload (request) {
-  return {
-    connectAccount: request.connectAccount,
-    ownerFirstName: request.ownerFirstName,
-    ownerLastName: request.ownerLastName,
-    ownerDOB: request.ownerDOB,
-    image: request.image,
-    ownerEmail: request.ownerEmail,
-    ownerPhone: request.ownerPhone,
-    state: request.state,
-    city: request.state,
-    zipCode: request.zipCode,
-    address: request.address,
-    address2: request.address2,
-    businessName: request.businessName,
-    type: request.type,
-    seasons: [],
-    businessUrl: request.businessUrl,
-    country: request.country,
-    keySecret: request.keySecret,
-    keyPublic: request.keyPublic,
-    status: 'active'
-  }
+  return new Promise((resolve, reject) => {
+    apiPayment.post('/account', payload)
+      .then(response => {
+        resolve(response.data)
+      }).catch(error => {
+        console.log(error)
+        reject(error)
+      })
+  })
 }
 
 class RequestService extends CommonService {
@@ -91,22 +108,22 @@ class RequestService extends CommonService {
 
   approve (id) {
     return new Promise((resolve, reject) => {
+      let req
       this.getById(id).then(request => {
+        req = request
         /* eslint prefer-promise-reject-errors: "error" */
-        if (!request) return reject(new Error('request id invalid'))
-        let payload = buildConnectAccountPayload(request)
-        stripe.createConnectAccount(payload).then(data => {
-          request.connectAccount = data.keySecret = data.id
-          request.keySecret = data.keySecret = data.keys.secret
-          request.keyPublic = data.keys.publishable
-          let organization = buildOrganizationPayload(request)
-          organizationService.save(organization).then(data => {
-            this.model.updateById(id, {organizationId: data._id, status: 'approved'})
-              .then(reqApproved => resolve(reqApproved))
-              .catch(reason => reject(reason))
-          })
-        }).catch(reason => reject(reason))
-      }).catch(reason => reject(reason))
+        if (!req) return reject(new Error('request id invalid'))
+        return createConnectAccount(req)
+      }).then(data => {
+        req.connectAccount = data.keySecret = data.id
+        req.keySecret = data.keySecret = data.keys.secret
+        req.keyPublic = data.keys.publishable
+        let organization = buildOrganizationPayload(req)
+        return organizationService.save(organization)
+      }).then(data => {
+        return this.model.updateById(id, {organizationId: data._id, status: 'approved'})
+      }).then(reqApproved => resolve(reqApproved))
+        .catch(reason => reject(reason))
     })
   }
 }

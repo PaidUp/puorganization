@@ -43,7 +43,12 @@ let all = {
     logName: 'pu-product-dev-log',
     metadata: {resource: {type: 'global'}}
   },
-  encryptKey: 'PZ3oXv2v6Pq5HAPFI9NFbQ=='
+  encryptKey: 'PZ3oXv2v6Pq5HAPFI9NFbQ==',
+  api: {
+    payment: {
+      url: 'http://localhost:9004/api/v1/payment'
+    }
+  }
 }
 
 if (process.env.NODE_ENV) {
