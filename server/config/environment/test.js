@@ -22,5 +22,10 @@ module.exports = {
     projectId: 'gothic-talent-192920',
     logName: 'pu-product-test-log',
     metadata: {resource: {type: 'global'}}
+  },
+  api: {
+    payment: {
+      url: 'http://devapi.getpaidup.com/api/v1/payment'
+    }
   }
 }
