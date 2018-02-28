@@ -10,15 +10,19 @@ class PaymentService extends CommonService {
 
   join (planId) {
     return new Promise((resolve, reject) => {
+      let res = {}
       this.model.findById(planId).then(plan => {
-        productService.getById(plan.productId).then(product => {
-          organizationService.getById(product.organizationId).then(organization => {
-            resolve({
-              plan, product, organization
-            })
-          }).catch(reason => reject(reason))
-        }).catch(reason => reject(reason))
-      }).catch(reason => reject(reason))
+        res.plan = plan
+        return productService.getById(plan.productId)
+      }).then(product => {
+        res.product = product
+        return organizationService.getById(product.organizationId)
+      }).then(organization => {
+        res.organization = organization
+        resolve(res)
+      }).catch(reason => {
+        reject(reason)
+      })
     })
   }
 }
