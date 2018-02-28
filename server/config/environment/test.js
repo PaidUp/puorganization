@@ -25,7 +25,7 @@ module.exports = {
   },
   api: {
     payment: {
-      url: 'http://devapi.getpaidup.com/api/v1/payment'
+      url: 'https://devapi.getpaidup.com/api/v1/payment'
     }
   }
 }
