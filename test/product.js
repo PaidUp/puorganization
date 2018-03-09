@@ -14,6 +14,7 @@ it('POST# / it should create a product', done => {
     .set('authorization', token)
     .send(results.product.payload)
     .end((err, res) => {
+      console.log('err: ', err)
       res.should.have.status(200)
       res.body.should.have.property('_id')
       res.body.organizationId.should.be.a('string')
