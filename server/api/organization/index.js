@@ -5,6 +5,7 @@ import { OrganizationController, ProductController, BeneficiaryController } from
 const router = express.Router()
 router.put('/:organizationId', auth.validate, OrganizationController.updateById)
 router.get('/:organizationId', auth.validate, OrganizationController.getById)
+router.get('/', auth.validate, OrganizationController.getAll)
 
 router.get('/:organizationId/products', auth.validate, ProductController.getListByOrganizationId)
 router.get('/:organizationId/product/:productId', auth.validate, ProductController.getByOrganizationId)

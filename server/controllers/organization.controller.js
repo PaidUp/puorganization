@@ -18,4 +18,12 @@ export default class OrganizationCotroller {
       return HandlerResponse.error(res, reason)
     })
   }
+
+  static getAll (req, res) {
+    organizationService.find({}).then(organizations => {
+      return HandlerResponse.send(res, organizations)
+    }).catch(reason => {
+      return HandlerResponse.error(res, reason)
+    })
+  }
 }

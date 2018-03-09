@@ -6,6 +6,18 @@ let token = common.token
 let chai = common.chai
 let results = common.results
 
+it('GET# / it should retrieve all organizations', done => {
+  chai
+    .request(server)
+    .get('/api/v1/organization')
+    .set('authorization', token)
+    .end((err, res) => {
+      res.should.have.status(200)
+      res.body.should.to.be.an('array')
+      done()
+    })
+})
+
 it('GET# /:organizationId it should retrieve an organization', done => {
   chai
     .request(server)
