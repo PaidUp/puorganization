@@ -14,10 +14,9 @@
   },
   "scripts": {
     "start": "node dist/build.js",
-    "test": "mocha --timeout 10000 --compilers js:babel-core/register ./test/**/*.spec.js",
+    "test": "export NODE_ENV=test && mocha --timeout 10000 --compilers js:babel-core/register ./test/**/*.spec.js",
     "jenkins": "npm test",
-    "dev": "cross-env NODE_ENV=development webpack --watch",
-    "prod": "cross-env NODE_ENV=production webpack",
+    "dev": "export NODE_ENV=local && webpack --watch",
     "compile": "babel --source-maps -d compile/ server/"
   },
   "keywords": [
@@ -27,19 +26,21 @@
   "author": "@paidUp",
   "license": "private",
   "dependencies": {
-    "@google-cloud/logging": "^1.1.2",
-    "blind": "^1.0.0",
-    "body-parser": "^1.14.1",
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
     "camelize": "^1.0.0",
     "composable-middleware": "^0.3.0",
     "compression": "^1.6.0",
     "cookie-parser": "^1.4.0",
+    "errorhandler": "^1.5.0",
     "express": "^4.13.4",
     "lodash": "^4.11.1",
     "method-override": "^2.3.5",
     "moment": "^2.20.1",
     "mongoose": "^5.0.1",
-    "pmx": "^0.6.1"
+    "morgan": "^1.9.0",
+    "pmx": "^0.6.1",
+    "pu-common": "git+ssh://git@github.com:PaidUp/PUCommon.git#0.16.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

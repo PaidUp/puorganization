@@ -5,6 +5,11 @@ export default class CommonService {
   constructor (model) {
     this.model = model
   }
+
+  get bulk () {
+    return this.model.bulk
+  }
+
   save (entity) {
     return this.model.save(entity).then(entity => entity)
   }
@@ -19,6 +24,12 @@ export default class CommonService {
 
   find (filter) {
     return this.model.find(filter).then(entities => entities)
+  }
+
+  findOneAndUpdate (conditions, update, options) {
+    return this.model.findOneAndUpdate(conditions, update, options).then(entities => {
+      return entities
+    })
   }
 
   getByIdAndFilter (id, values) {

@@ -2,59 +2,74 @@ let chai = require('chai')
 let chaiHttp = require('chai-http')
 let server = require('../server/app').default
 let should = chai.should()
-let token = require('../server/config/environment').default.nodePass.me.token
+let config = require('../server/config/environment').default
+let token =
+  'Bearer ' +
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImNvbnRhY3RzIjpbXSwicm9sZXMiOlsicGFyZW50Il0sIl9pZCI6IjVhODMyMTlkMTc1Zjk1MGU3NjlkYmViMyIsImZpcnN0TmFtZSI6InRlc3QiLCJsYXN0TmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ0eXBlIjoiY3VzdG9tZXIiLCJzYWx0IjoienhvYU1LbjY1TzIwWE1LY0x3aU0yQT09IiwiaGFzaGVkUGFzc3dvcmQiOiJKWWJaNU5wbnJqZTFEaUdMcmhrUm9DTDM4cW5RTVFOKzZRWTJka0pnNy9QMlBVeWZIRkozbllMdlZ5QjhiYXNqb3N2T2pseU9xNlB5WlFIZHU4cVQ5QT09IiwiX192IjowfSwiaWF0IjoxNTE4NTQzMjg3LCJleHAiOjM0MTA3MDMyODd9.pRQNdpZMVh0GRVGyj8Yxh2d_bhwi66hKj49iGChmIuE'
 let results = {
   organization: {},
   product: {},
-  plan: {}
+  plan: {},
+  request: {},
+  beneficiary: {}
+}
+
+results.request.payload = {
+  userId: '59af4f5d5d31df6d2db0f265',
+  ownerFirstName: 'Ricardo',
+  ownerLastName: 'Lara',
+  image: 'img',
+  ownerDOB: '1979-04-17T03:00:00.000Z',
+  ownerSSN: '0000',
+  ownerEmail: 'riclara222@gmail.com',
+  ownerPhone: '3017718888',
+  country: 'US',
+  state: 'AK',
+  city: 'Enviado',
+  zipCode: '60137',
+  businessTaxId: '111111111',
+  address: 'Cll 40aa Sur # 32 70, 306',
+  address2: '',
+  businessUrl: 'https://www.getpaidup.com',
+  businessName: 'Test',
+  type: 'company',
+  routingNumber: '110000000',
+  accountNumber: '000123456789'
 }
 
 results.organization.payload = {
-  userId: '33333',
-  organizationInfo: {
-    ownerFirstName: 'Ricardo',
-    ownerLastName: 'Lara',
-    ownerDOB: '2017-04-17T03:00:00.000Z',
-    ownerSSN: 'uVOoJjSe/Ti4',
-    ownerEmail: 'riclara222@gmail.com',
-    ownerPhone: '3017718888',
-    state: 'AK',
-    city: 'Enviado',
-    zipCode: '00000',
-    EIN: '111111111',
-    Address: 'Cll 40aa Sur # 32 70, 306',
-    AddressLineTwo: '',
-    businessName: 'Test',
-    businessType: 'Non-Profit',
-    aba: 'uVOpJzWf/Dm5',
-    dda: 'uFKpJjec+Dy/Foz/',
-    ownerId: '59af4f5d5d31df6d2db0f265',
-    seasons: ['Season A', 'Season B'],
-    paymentId: 'acct_18OZ8zIhv1Yesxk9',
-    referralCode: 'done',
-    verify: 'pending',
-    updateAt: '2017-09-06T01:28:13.367Z',
-    createAt: '2017-09-06T01:28:13.367Z',
-    website: 'https://www.getpaidup.com',
-    averagePayment: '1',
-    country: 'US'
-  }
+  connectAccount: 'acct_18OZ8zIhv1Yesxk9',
+  ownerFirstName: 'Ricardo',
+  ownerLastName: 'Lara',
+  ownerDOB: '1979-04-17T03:00:00.000Z',
+  image: 'img',
+  ownerEmail: 'riclara222@gmail.com',
+  ownerPhone: '3017718888',
+  state: 'AK',
+  city: 'Enviado',
+  zipCode: '00000',
+  address: 'Cll 40aa Sur # 32 70, 306',
+  address2: '',
+  businessName: 'Test',
+  type: '',
+  seasons: ['Season A', 'Season B'],
+  businessUrl: 'https://www.getpaidup.com',
+  country: 'US',
+  keySecret: 'aaa',
+  keyPublic: 'public',
+  status: 'active'
 }
 
 results.product.payload = {
-  paymentId: 'acct_18OZ8zIhv1Yesxk9',
   season: 'test',
-  organizationId: '57b6139811627b1d0ddbee30',
-  organizationName: 'Cobras Volleyball Club',
-  organizationLocation: 'San Antonio, TX',
   sku: 'TX - SAN ANTONIO - COBRAS VOLLEYBALL - 17 BLACK PREMIER 2016',
   name: '17 Black (Premier)',
+  description: 'Cobras Volleyball Club',
+  organizationLocation: 'San Antonio, TX',
   description: '17 Black (Premier)',
-  location: 'San Antonio, TX',
-  visibility: true,
-  status: true,
   image: 'value image url',
   statementDescriptor: 'PaidUp Cobras 17 Black',
+  status: 'active',
   customInfo: {
     formData: [],
     formTemplate: [
@@ -77,24 +92,15 @@ results.product.payload = {
     ]
   },
   processingFees: {
-    cardFeeActual: 2.9,
-    cardFeeDisplay: 2.9,
-    cardFeeFlatActual: 0.3,
-    cardFeeFlatDisplay: 0.3,
-    achFeeActual: 0.8,
-    achFeeDisplay: 2.3,
-    achFeeFlatActual: 0,
-    achFeeFlatDisplay: 0,
-    achFeeCapActual: 0.25,
-    achFeeCapDisplay: 5
+    cardFee: 2.9,
+    cardFeeFlat: 0.3,
+    achFee: 2.3,
+    achFeeFlat: 0,
+    achFeeCap: 5
   },
-  collectionsFee: {
-    fee: 3.5,
-    feeFlat: 0
-  },
-  paysFees: {
+  payFees: {
     processing: true,
-    collections: true
+    collect: true
   }
 }
 
@@ -103,57 +109,56 @@ results.plan.payload = {
   description: 'Monthly Payments',
   paymentMethods: ['card'],
   visible: true,
+  status: 'active',
   dues: [
     {
-      version: 'v2',
-      description: 'Deposit',
+      description: 'Deposit 1',
       dateCharge: '2017-01-01 10:00',
-      amount: 500.0,
-      discount: 0,
-      applyDiscount: false
+      maxDateCharge: '2017-01-15 10:00',
+      amount: 500.0
     },
     {
-      version: 'v2',
       description: 'Payment 1 of 5',
       dateCharge: '2017-09-01 10:00',
-      amount: 500.0,
-      discount: 0,
-      applyDiscount: false
+      amount: 500.0
     },
     {
-      version: 'v2',
       description: 'Payment 2 of 5',
       dateCharge: '2017-10-01 10:00',
-      amount: 450.0,
-      discount: 0,
-      applyDiscount: false
+      amount: 450.0
     },
     {
-      version: 'v2',
       description: 'Payment 3 of 5',
       dateCharge: '2017-11-01 10:00',
-      amount: 400.0,
-      discount: 0,
-      applyDiscount: false
+      amount: 400.0
     },
     {
-      version: 'v2',
       description: 'Payment 4 of 5',
       dateCharge: '2017-12-01 10:00',
-      amount: 300.0,
-      discount: 0,
-      applyDiscount: false
+      amount: 300.0
     },
     {
-      version: 'v2',
       description: 'Payment 5 of 5',
       dateCharge: '2017-01-01 10:00',
-      amount: 100.0,
-      discount: 0,
-      applyDiscount: false
+      amount: 100.0
     }
   ]
 }
+
+results.beneficiary.payload = {
+  type: 'athlete',
+  firstName: 'John Doe Jr',
+  lastName: 'John Doe Jr',
+  description: 'some description',
+  status: 'active',
+  assigneesEmail: 'test@test.com'
+}
+
+results.beneficiary.imports = [
+  { organizationId: 'xxx', firstName: 'testFirsName1', lastName: 'testLastName1', assigneesEmail: 'email@test.com1' },
+  { organizationId: 'xxx', firstName: 'testFirsName2', lastName: 'testLastName2', assigneesEmail: 'email@test.com1' },
+  { organizationId: 'xxx', firstName: 'testFirsName3', lastName: 'testLastName3', assigneesEmail: 'email@test.com1' }
+]
 
 chai.use(chaiHttp)
 
