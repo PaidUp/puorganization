@@ -1,12 +1,13 @@
-let chai = require('chai')
-let chaiHttp = require('chai-http')
-let server = require('../server/app').default
-let should = chai.should()
-let config = require('../server/config/environment').default
-let token =
+const chai = require('chai')
+const chaiHttp = require('chai-http')
+const uuidv4 = require('uuid/v4')
+const server = require('../server/app').default
+const should = chai.should()
+const config = require('../server/config/environment').default
+const token =
   'Bearer ' +
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImNvbnRhY3RzIjpbXSwicm9sZXMiOlsicGFyZW50Il0sIl9pZCI6IjVhODMyMTlkMTc1Zjk1MGU3NjlkYmViMyIsImZpcnN0TmFtZSI6InRlc3QiLCJsYXN0TmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ0eXBlIjoiY3VzdG9tZXIiLCJzYWx0IjoienhvYU1LbjY1TzIwWE1LY0x3aU0yQT09IiwiaGFzaGVkUGFzc3dvcmQiOiJKWWJaNU5wbnJqZTFEaUdMcmhrUm9DTDM4cW5RTVFOKzZRWTJka0pnNy9QMlBVeWZIRkozbllMdlZ5QjhiYXNqb3N2T2pseU9xNlB5WlFIZHU4cVQ5QT09IiwiX192IjowfSwiaWF0IjoxNTE4NTQzMjg3LCJleHAiOjM0MTA3MDMyODd9.pRQNdpZMVh0GRVGyj8Yxh2d_bhwi66hKj49iGChmIuE'
-let results = {
+  const results = {
   organization: {},
   product: {},
   plan: {},
@@ -151,7 +152,7 @@ results.beneficiary.payload = {
   lastName: 'John Doe Jr',
   description: 'some description',
   status: 'active',
-  assigneesEmail: 'test@test.com'
+  assigneesEmail: uuidv4()+'@test.com'
 }
 
 results.beneficiary.imports = [

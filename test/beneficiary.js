@@ -65,6 +65,18 @@ it('GET# /:organizationId/beneficiaries it should retrieve beneficiaries list by
     })
 })
 
+it('GET# /assignee/:assigneeEmail it should retrieve beneficiaries list by assignee email', done => {
+  chai
+    .request(server)
+    .get(`/api/v1/organization/beneficiary/assignee/${common.results.beneficiary.payload.assigneesEmail}`)
+    .set('authorization', token)
+    .end((err, res) => {
+      res.should.have.status(200)
+      res.body.should.to.be.an('array')
+      done()
+    })
+})
+
 it('GET# /organization/:organizationId/beneficiary/:beneficiaryId it should retrieve a beneficiary by organization', done => {
   chai
     .request(server)

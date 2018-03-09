@@ -72,6 +72,18 @@ export default class BeneficiaryController {
     })
   }
 
+  static getByassigneesEmail (req, res) {
+    const assigneeEmail = req.params.assigneeEmail
+    if (!assigneeEmail) {
+      return hr.error(res, 'assigneeEmail is required', 422)
+    }
+    beneficiaryService.find({ assigneesEmail: assigneeEmail }).then(result => {
+      hr.send(res, result)
+    }).catch(reason => {
+      hr.error(res, reason)
+    })
+  }
+
   static import (req, res) {
     let beneficiaries = req.body
     beneficiaryService.import(beneficiaries).then(data => {
