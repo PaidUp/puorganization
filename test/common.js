@@ -1,13 +1,12 @@
 const chai = require('chai')
+const axios = require('axios')
 const chaiHttp = require('chai-http')
 const uuidv4 = require('uuid/v4')
 const server = require('../server/app').default
 const should = chai.should()
 const config = require('../server/config/environment').default
-const token =
-  'Bearer ' +
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImNvbnRhY3RzIjpbXSwicm9sZXMiOlsicGFyZW50Il0sIl9pZCI6IjVhODMyMTlkMTc1Zjk1MGU3NjlkYmViMyIsImZpcnN0TmFtZSI6InRlc3QiLCJsYXN0TmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ0eXBlIjoiY3VzdG9tZXIiLCJzYWx0IjoienhvYU1LbjY1TzIwWE1LY0x3aU0yQT09IiwiaGFzaGVkUGFzc3dvcmQiOiJKWWJaNU5wbnJqZTFEaUdMcmhrUm9DTDM4cW5RTVFOKzZRWTJka0pnNy9QMlBVeWZIRkozbllMdlZ5QjhiYXNqb3N2T2pseU9xNlB5WlFIZHU4cVQ5QT09IiwiX192IjowfSwiaWF0IjoxNTE4NTQzMjg3LCJleHAiOjM0MTA3MDMyODd9.pRQNdpZMVh0GRVGyj8Yxh2d_bhwi66hKj49iGChmIuE'
-  const results = {
+let token
+const results = {
   organization: {},
   product: {},
   plan: {},
@@ -161,10 +160,23 @@ results.beneficiary.imports = [
   { organizationId: 'xxx', firstName: 'testFirsName3', lastName: 'testLastName3', assigneesEmail: 'email@test.com1' }
 ]
 
+axios.post('https://devapi.getpaidup.com/api/v1/user/login/email', {
+      email: 'test@getpaidup.com',
+      password: 'test123',
+      rememberMe: false
+    })
+    .then(function (response) {
+      token = 'Bearer ' + response.data.token
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+
 chai.use(chaiHttp)
 
 exports.chai = chai
 exports.server = server
 exports.should = should
-exports.token = token
+exports.token = function () { return token }
 exports.results = results

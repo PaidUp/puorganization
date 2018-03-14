@@ -11,7 +11,7 @@ it('POST# / it should create a beneficiary', done => {
   chai
     .request(server)
     .post('/api/v1/organization/beneficiary')
-    .set('authorization', token)
+    .set('authorization', token())
     .send(results.beneficiary.payload)
     .end((err, res) => {
       res.should.have.status(200)
@@ -26,7 +26,7 @@ it('GET# /:beneficiaryId it should retrieve a beneficiary', done => {
   chai
     .request(server)
     .get('/api/v1/organization/beneficiary/' + results.beneficiary.beneficiaryId)
-    .set('authorization', token)
+    .set('authorization', token())
     .end((err, res) => {
       res.should.have.status(200)
       res.body.should.have.property('_id')
@@ -41,7 +41,7 @@ it('PUT# /:beneficiaryId it should update a beneficiary', done => {
   chai
     .request(server)
     .put('/api/v1/organization/beneficiary/'+ results.beneficiary.beneficiaryId)
-    .set('authorization', token)
+    .set('authorization', token())
     .send({description: 'is a great boy'})
     .end((err, res) => {
       res.should.have.status(200)
@@ -56,7 +56,7 @@ it('GET# /:organizationId/beneficiaries it should retrieve beneficiaries list by
   chai
     .request(server)
     .get(`/api/v1/organization/${results.organization.document._id}/beneficiaries`)
-    .set('authorization', token)
+    .set('authorization', token())
     .end((err, res) => {
       res.should.have.status(200)
       res.body.should.to.be.an('array')
@@ -69,7 +69,7 @@ it('GET# /assignee/:assigneeEmail it should retrieve beneficiaries list by assig
   chai
     .request(server)
     .get(`/api/v1/organization/beneficiary/assignee/${common.results.beneficiary.payload.assigneesEmail}`)
-    .set('authorization', token)
+    .set('authorization', token())
     .end((err, res) => {
       res.should.have.status(200)
       res.body.should.to.be.an('array')
@@ -81,7 +81,7 @@ it('GET# /organization/:organizationId/beneficiary/:beneficiaryId it should retr
   chai
     .request(server)
     .get(`/api/v1/organization/${results.organization.document._id}/beneficiary/${results.beneficiary.beneficiaryId}`)
-    .set('authorization', token)
+    .set('authorization', token())
     .end((err, res) => {
       res.should.have.status(200)
       res.body.should.have.property('_id')
