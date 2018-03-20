@@ -47,3 +47,36 @@ it('PUT# /:organizationId it should update an organization', done => {
       done()
     })
 })
+
+it('POST# /upload/logo it should upload image to s3', done => {
+  chai
+    .request(server)
+    .post('/api/v1/organization/upload/logo')
+    .set('authorization', token())
+    .set('Content-Type', 'multipart/form-data')
+    .attach('logo', 'test/media/test.jpg')
+    .end(function(err, res){
+      res.should.have.status(200)
+      res.body.should.have.property('key')
+      res.body.key.should.be.a('string')
+      res.body.key.should.equal('logo/test.jpg')
+      done()
+    })
+})
+
+it('PUT# /upload/logo it should upload an image and update image attribute into organization doc', done => {
+  chai
+    .request(server)
+    .put('/api/v1/organization/upload/logo')
+    .set('authorization', token())
+    .set('Content-Type', 'multipart/form-data')
+    .field('organizationId', results.organization.document._id)
+    .attach('logo', 'test/media/test.jpg')
+    .end(function(err, res){
+      res.should.have.status(200)
+      res.body.should.have.property('image')
+      res.body.image.should.be.a('string')
+      res.body.image.should.equal('logo/test.jpg')
+      done()
+    })
+})

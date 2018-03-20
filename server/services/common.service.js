@@ -11,29 +11,27 @@ export default class CommonService {
   }
 
   save (entity) {
-    return this.model.save(entity).then(entity => entity)
+    return this.model.save(entity)
   }
 
   updateById (id, values) {
-    return this.model.updateById(id, values).then(entity => entity)
+    return this.model.updateById(id, values)
   }
 
   getById (entityId) {
-    return this.model.findById(entityId).then(entity => entity)
+    return this.model.findById(entityId)
   }
 
   find (filter) {
-    return this.model.find(filter).then(entities => entities)
+    return this.model.find(filter)
   }
 
   findOneAndUpdate (conditions, update, options) {
-    return this.model.findOneAndUpdate(conditions, update, options).then(entities => {
-      return entities
-    })
+    return this.model.findOneAndUpdate(conditions, update, options)
   }
 
   getByIdAndFilter (id, values) {
     values._id = new ObjectId(id)
-    return this.model.findOne(values).then(entity => entity)
+    return this.model.findOne(values)
   }
 }
