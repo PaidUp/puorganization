@@ -59,6 +59,16 @@ let all = {
     payment: {
       url: 'http://localhost:9004/api/v1/payment'
     }
+  },
+  s3: {
+    organization: {
+      logo: {
+        bucket: 'pu-media-dev',
+        directory: 'organization/logo',
+        setOriginalName: true,
+        isPublic: true
+      }
+    }
   }
 }
 
