@@ -1,6 +1,9 @@
 import api from './api'
+import cors from 'cors'
 
 export default function (app) {
+  app.use(cors())
+
   // Insert routes below
   app.use('/api/v1/organization', api)
 

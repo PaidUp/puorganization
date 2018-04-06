@@ -5,6 +5,7 @@ export default class BeneficiaryController {
   static save (req, res) {
     let beneficiary = {
       organizationId: req.body.organizationId,
+      organizationName: req.body.organizationName,
       type: req.body.type,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -17,8 +18,11 @@ export default class BeneficiaryController {
     if (req.body.assigneesEmail) {
       upd.$addToSet = { assigneesEmail: req.body.assigneesEmail }
     }
-    beneficiary.key = `${beneficiary.organizationId.toLowerCase().trim()}_${beneficiary.firstName.toLowerCase().trim()}_${beneficiary.lastName.toLowerCase().trim()}`
-    beneficiaryService.findOneAndUpdate({ key: beneficiary.key }, upd, { upsert: true, new: true }).then(result => {
+    beneficiaryService.findOneAndUpdate({
+      organizationId: beneficiary.organizationId,
+      firstName: beneficiary.firstName,
+      lastName: beneficiary.lastName
+    }, upd, { upsert: true, new: true }).then(result => {
       hr.send(res, result)
     }).catch(reason => {
       hr.error(res, reason)
