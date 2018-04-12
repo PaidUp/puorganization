@@ -27,7 +27,7 @@ export default function (app) {
     }
     next()
   })
-  if (process.env.NODE_ENV === 'local') {
+  if (process.env.NODE_ENV === 'local' || process.env.NODE_ENV === 'develop') {
     app.use(errorhandler())
     app.use(morgan('dev'))
   }
