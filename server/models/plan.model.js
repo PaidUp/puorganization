@@ -1,4 +1,6 @@
 import CommonModel from './common.model'
+import { Schema } from 'mongoose'
+const ObjectId = Schema.Types.ObjectId
 
 const dues = {
   description: { type: String, required: true },
@@ -9,7 +11,7 @@ const dues = {
 
 const schema = {
   key: { type: String, required: true },
-  productId: { type: String, required: true },
+  productId: { type: ObjectId, required: true, ref: 'pu_organization_products' },
   description: { type: String, required: true },
   visible: { type: Boolean, required: true },
   status: { type: String, required: true, enum: ['active', 'inactive'] },
