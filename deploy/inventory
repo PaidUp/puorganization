@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [dev]
 dev.getpaidup.com     ansible_connection=ssh        ansible_user=jenkins
 
@@ -6,3 +7,13 @@ dev.getpaidup.com     ansible_connection=ssh        ansible_user=jenkins
 
 [prod]
 app.getpaidup.com     ansible_connection=ssh        ansible_user=jenkins
+=======
+[develop]
+ec2-52-87-185-17.compute-1.amazonaws.com     ansible_connection=ssh        ansible_user=ubuntu     ansible_ssh_private_key_file=/Users/riclara/.ssh/develop-env.pem
+
+[stage]
+ec2-52-90-232-135.compute-1.amazonaws.com     ansible_connection=ssh        ansible_user=ubuntu     ansible_ssh_private_key_file=/Users/riclara/.ssh/develop-env.pem
+
+[production]
+#app.getpaidup.com     ansible_connection=ssh        ansible_user=jenkins
+>>>>>>> develop

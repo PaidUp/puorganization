@@ -55,6 +55,5 @@
     "editor.tabSize": 2,
     "terminal.integrated.shell.linux": "/bin/zsh",
     "terminal.integrated.shell.osx": "/bin/zsh",
-    "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.fontFamily": "Source Code Pro for Powerline"
 }

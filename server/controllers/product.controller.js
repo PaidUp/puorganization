@@ -1,66 +1,60 @@
-import { ProductService } from '@/services'
-import { HandlerResponse } from '@/util'
-const productService = new ProductService()
+import { productService } from '@/services'
+import { HandlerResponse } from 'pu-common'
 
 export default class ProductController {
   static save (req, res) {
-    let hr = new HandlerResponse(res)
     const product = req.body
     productService.save(product).then(result => {
-      hr.send(result)
+      HandlerResponse.send(res, result)
     }).catch(reason => {
-      hr.error(reason)
+      HandlerResponse.error(res, reason)
     })
   }
 
   static updateById (req, res) {
-    let hr = new HandlerResponse(res)
     const product = req.body
     const productId = req.params.productId
     productService.updateById(productId, product).then(result => {
-      hr.send(result)
+      HandlerResponse.send(res, result)
     }).catch(reason => {
-      hr.error(reason)
+      HandlerResponse.error(res, reason)
     })
   }
 
   static getById (req, res) {
-    let hr = new HandlerResponse(res)
     const productId = req.params.productId
     productService.getById(productId).then(result => {
-      hr.send(result)
+      HandlerResponse.send(res, result)
     }).catch(reason => {
-      hr.error(reason)
+      HandlerResponse.error(res, reason)
     })
   }
 
   static getListByOrganizationId (req, res) {
-    let hr = new HandlerResponse(res)
     const organizationId = req.params.organizationId
     if (!organizationId) {
-      return hr.error('organizationId is required', 422)
+      return HandlerResponse.error(res, 'organizationId is required', 422)
     }
     productService.find({organizationId}).then(result => {
-      hr.send(result)
+      HandlerResponse.send(res, result)
     }).catch(reason => {
-      hr.error(reason)
+      HandlerResponse.error(res, reason)
     })
   }
 
   static getByOrganizationId (req, res) {
-    let hr = new HandlerResponse(res)
     const organizationId = req.params.organizationId
     const productId = req.params.productId
     if (!organizationId) {
-      return hr.error('organizationId is required', 422)
+      return HandlerResponse.error(res, 'organizationId is required', 422)
     }
     if (!productId) {
-      return hr.error('productId is required', 422)
+      return HandlerResponse.error(res, 'productId is required', 422)
     }
     productService.getByIdAndFilter(productId, {organizationId}).then(result => {
-      hr.send(result)
+      HandlerResponse.send(res, result)
     }).catch(reason => {
-      hr.error(reason)
+      HandlerResponse.error(res, reason)
     })
   }
 }

@@ -1,4 +1,10 @@
 node_modules
 *.log
 *.retry
+<<<<<<< HEAD
 dist/
+=======
+dist/
+.idea
+server/config/environment/index.js
+>>>>>>> develop

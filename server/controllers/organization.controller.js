@@ -1,47 +1,35 @@
-import { OrganizationService } from '@/services'
-import { HandlerResponse } from '@/util'
-const organizationService = new OrganizationService()
+import { organizationService } from '@/services'
+import { HandlerResponse as HR } from 'pu-common'
 
 export default class OrganizationCotroller {
-  static save (req, res) {
-    let hr = new HandlerResponse(res)
-    organizationService.save(req.body.userId, req.body.organizationInfo)
-      .then(organization => {
-        return hr.send({organizationId: organization._id})
-      }).catch(reason => {
-        return hr.error(reason)
-      })
-  }
-
-  static updatePaymentId (req, res) {
-    let hr = new HandlerResponse(res)
-    let values = {verify: 'done', aba: '', dda: '', ownerSSN: '', paymentId: req.params.paymentId}
-    organizationService.updateById(req.params.organizationId, values).then(organization => {
-      if (!organization) {
-        return hr.error({name: 'ValidationError', message: 'organization was processed', errors: 'organization does not exists or was processed'}, 400)
-      }
-      return hr.send(organization)
-    }).catch(reason => {
-      return hr.error(reason)
-    })
-  }
-
   static updateById (req, res) {
-    let hr = new HandlerResponse(res)
     let values = req.body
-    organizationService.updateById(req.params.organizationId, values).then(organization => {
-      return hr.send(organization)
-    }).catch(reason => {
-      return hr.error(reason)
-    })
+    organizationService.updateById(req.params.organizationId, values)
+      .then(organization => HR.send(res, organization))
+      .catch(reason => HR.error(res, reason))
   }
 
   static getById (req, res) {
-    let hr = new HandlerResponse(res)
-    organizationService.getById(req.params.organizationId).then(organization => {
-      return hr.send(organization)
-    }).catch(reason => {
-      return hr.error(reason)
-    })
+    organizationService.getById(req.params.organizationId)
+      .then(organization => HR.send(res, organization))
+      .catch(reason => HR.error(res, reason))
+  }
+
+  static getAll (req, res) {
+    organizationService.find({})
+      .then(organizations => HR.send(res, organizations))
+      .catch(reason => HR.error(res, reason))
+  }
+
+  static uploadLogo (req, res) {
+    HR.send(res, req.files[0])
+  }
+
+  static updateLogo (req, res) {
+    const organizationId = req.body.organizationId
+    if (!organizationId) return HR.error(res, 'organizationId is required', 422)
+    organizationService.updateById(organizationId, { image: req.files[0].key })
+      .then(organization => HR.send(res, organization))
+      .catch(reason => HR.error(res, reason))
   }
 }

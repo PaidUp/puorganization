@@ -1,9 +1,13 @@
-import OrganizationService from './organization.service'
-import ProductService from './product.service'
-import PlanService from './plan.service'
+import organizationService from './organization.service'
+import productService from './product.service'
+import planService from './plan.service'
+import requestService from './request.service'
+import beneficiaryService from './beneficiary.service'
 
 export {
-  OrganizationService,
-  ProductService,
-  PlanService
+  organizationService,
+  productService,
+  planService,
+  requestService,
+  beneficiaryService
 }

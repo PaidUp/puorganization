@@ -13,6 +13,10 @@ jobs:
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
+    environment:
+      - ANSIBLE_HOST_KEY_CHECKING: false
+      - AWS_ACCESS_KEY_ID: AKIAIQMH2OTQ22LUNQXQ
+      - AWS_SECRET_ACCESS_KEY: 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
 
     working_directory: ~/repo
 
@@ -26,7 +30,10 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: yarn install
+      - run: npm install
+      - run:
+          name: copy config file
+          command: cp server/config/environment/index.base.js server/config/environment/index.js
 
       - save_cache:
           paths:
@@ -34,9 +41,46 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
         
       # run tests!
-      - run: yarn test
+      - run: npm test
 
 
+  deploy-develop:
+    docker:
+      - image: circleci/node:8.9
+    environment:
+      - ANSIBLE_HOST_KEY_CHECKING: false
+    working_directory: ~/repo
+    steps:
+      - run: |
+          sudo apt-get update &&
+          sudo apt-get install software-properties-common &&
+          sudo apt-add-repository "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" -y &&
+          sudo apt-get update &&
+          sudo apt-get install ansible
+      - checkout
+      - run:
+          name: Deploy if tests pass and branch is develop
+          command: ansible-playbook deploy/main.yml -i ./deploy/inventory --extra-vars "env=develop"
+
+  deploy-stage:
+    docker:
+      - image: circleci/node:8.9
+    environment:
+      - ANSIBLE_HOST_KEY_CHECKING: false
+    working_directory: /tmp/pu-organization  
+    steps:
+      - run: |
+          sudo apt-get update &&
+          sudo apt-get install software-properties-common &&
+          sudo apt-add-repository "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" -y &&
+          sudo apt-get update &&
+          sudo apt-get install ansible
+      - checkout
+      - run:
+          name: Deploy if tests pass and branch is stage
+          command: ansible-playbook deploy/main.yml -i ./deploy/inventory --extra-vars "env=stage"
+
+<<<<<<< HEAD
   deploy-develop:
     docker:
       - image: circleci/node:8.9
@@ -73,6 +117,8 @@ jobs:
           name: Deploy if tests pass and branch is stage
           command: ansible-playbook deploy/stage.yml -i ./deploy/inventory 
 
+=======
+>>>>>>> develop
 workflows:
   version: 2
   build-deploy:

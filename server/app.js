@@ -4,7 +4,11 @@ import mongoose from 'mongoose'
 import config from './config/environment'
 import configExpress from './config/express'
 import routes from './routes'
-import Logger from './util/logger'
+import { Logger, auth, Ncryp } from 'pu-common'
+
+auth.config = config.auth
+Ncryp.setKey(config.encryptKey)
+Logger.setConfig(config.logger)
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 
@@ -30,12 +34,23 @@ var server = app.listen(config.port, config.ip, function () {
     }
     Logger.info('Connected to database')
   })
-  Logger.info(`pu-product listening on ${config.port}, in ${app.get('env')} mode`)
+  Logger.info(`pu-orgnization listening on ${config.port}, in ${app.get('env')} mode`)
 })
 
 process.on('exit', (cb) => {
   mongoose.connection.close()
   console.log('bye......')
+})
+
+process.on('unhandledRejection', (err) => {
+  throw err
+})
+
+process.on('uncaughtException', (err) => {
+  Logger.critical(err)
+  if (process.env.NODE_ENV === 'test') {
+    process.exit(1)
+  }
 })
 
 export default server

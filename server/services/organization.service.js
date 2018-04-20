@@ -1,17 +1,27 @@
 import { OrganizationModel } from '@/models'
 import CommonService from './common.service'
-import { Ncryp } from '@/util'
-const organizationModel = new OrganizationModel()
+import { Ncryp } from 'pu-common'
 
-export default class OrganizationService extends CommonService {
+class OrganizationService extends CommonService {
   constructor () {
-    super(organizationModel)
+    super(new OrganizationModel())
   }
-  save (userId, dataOrganization) {
-    dataOrganization.ownerId = userId
-    dataOrganization.aba = Ncryp.encryptField(dataOrganization.aba)
-    dataOrganization.dda = Ncryp.encryptField(dataOrganization.dda)
-    dataOrganization.ownerSSN = Ncryp.encryptField(dataOrganization.ownerSSN)
-    return organizationModel.save(dataOrganization).then(data => data)
+
+  save (data) {
+    data.keySecret = Ncryp.encryptField(data.keySecret)
+    return this.model.save(data).then(org => org)
+  }
+
+  getById (entityId) {
+    return this.model.findById(entityId).then(entity => {
+      entity = entity.toObject()
+      delete entity.keyPublic
+      delete entity.keySecret
+      return entity
+    })
   }
 }
+
+let organizationService = new OrganizationService()
+
+export default organizationService

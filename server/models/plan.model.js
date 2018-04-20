@@ -1,17 +1,20 @@
 import CommonModel from './common.model'
+import { Schema } from 'mongoose'
+const ObjectId = Schema.Types.ObjectId
 
 const dues = {
-  version: { type: String, required: true, default: 'v2' },
   description: { type: String, required: true },
   dateCharge: { type: Date, required: true },
+  maxDateCharge: { type: Date },
   amount: { type: Number, required: true }
 }
 
 const schema = {
   key: { type: String, required: true },
-  productId: { type: String, required: true },
+  productId: { type: ObjectId, required: true, ref: 'pu_organization_products' },
   description: { type: String, required: true },
   visible: { type: Boolean, required: true },
+  status: { type: String, required: true, enum: ['active', 'inactive'] },
   paymentMethods: { type: [String], enum: ['bank', 'card'], lowercase: true },
   dues: { type: [dues], required: true }
 }
