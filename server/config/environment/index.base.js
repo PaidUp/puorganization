@@ -50,7 +50,7 @@ let all = {
   },
   processingFees: {
     cardFee: 2.9,
-    cardFeeFlat: 3,
+    cardFeeFlat: 0.3,
     achFee: 0.8,
     achFeeFlat: 0,
     achFeeCap: 5
