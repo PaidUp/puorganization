@@ -61,6 +61,7 @@ let all = {
     }
   },
   s3: {
+    bucket: 'pu-media-dev',
     organization: {
       logo: {
         bucket: 'pu-media-dev',
