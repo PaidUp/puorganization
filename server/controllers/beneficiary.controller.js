@@ -29,6 +29,11 @@ export default class BeneficiaryController {
     })
   }
 
+  static avatar (req, res) {
+    if (!req.file) return hr.error(res, 'files is required', 422)
+    return hr.send(res, {})
+  }
+
   static updateById (req, res) {
     const beneficiary = req.body
     const beneficiaryId = req.params.beneficiaryId
