@@ -13,7 +13,6 @@ export default class BeneficiaryController {
       status: req.body.status || 'active',
       assigneesEmail: req.body.assigneesEmail
     }
-    console.log('beneficiary: ', beneficiary)
     beneficiaryService.save(beneficiary)
       .then(result => {
         hr.send(res, result)

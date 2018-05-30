@@ -10,7 +10,7 @@ it('POST# / it should create an requst', done => {
   chai
     .request(server)
     .post('/api/v1/organization/request')
-    .set('authorization', token())
+    .set('Authorization', token())
     .send(requestResults.payload)
     .end((err, res) => {
       res.should.have.status(200)

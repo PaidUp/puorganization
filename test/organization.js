@@ -10,7 +10,7 @@ it('GET# / it should retrieve all organizations', done => {
   chai
     .request(server)
     .get('/api/v1/organization')
-    .set('authorization', token())
+    .set('Authorization', token())
     .end((err, res) => {
       res.should.have.status(200)
       res.body.should.to.be.an('array')

@@ -146,6 +146,8 @@ results.plan.payload = {
 }
 
 results.beneficiary.payload = {
+  organizationId: 'nnn',
+  organizationName: 'mmmm',
   type: 'athlete',
   firstName: 'John Doe Jr',
   lastName: 'John Doe Jr',
