@@ -6,27 +6,20 @@ export default class BeneficiaryController {
     let beneficiary = {
       organizationId: req.body.organizationId,
       organizationName: req.body.organizationName,
-      type: req.body.type,
+      type: req.body.type || 'athlete',
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       description: req.body.description,
-      status: req.body.status
+      status: req.body.status || 'active',
+      assigneesEmail: req.body.assigneesEmail
     }
-    let upd = {
-      $set: beneficiary
-    }
-    if (req.body.assigneesEmail) {
-      upd.$addToSet = { assigneesEmail: req.body.assigneesEmail }
-    }
-    beneficiaryService.findOneAndUpdate({
-      organizationId: beneficiary.organizationId,
-      firstName: beneficiary.firstName,
-      lastName: beneficiary.lastName
-    }, upd, { upsert: true, new: true }).then(result => {
-      hr.send(res, result)
-    }).catch(reason => {
-      hr.error(res, reason)
-    })
+    console.log('beneficiary: ', beneficiary)
+    beneficiaryService.save(beneficiary)
+      .then(result => {
+        hr.send(res, result)
+      }).catch(reason => {
+        hr.error(res, reason)
+      })
   }
 
   static avatar (req, res) {
