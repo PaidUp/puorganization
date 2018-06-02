@@ -5,24 +5,25 @@ export default class BeneficiaryController {
   static save (req, res) {
     let beneficiary = {
       organizationId: req.body.organizationId,
-      type: req.body.type,
+      organizationName: req.body.organizationName,
+      type: req.body.type || 'athlete',
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       description: req.body.description,
-      status: req.body.status
+      status: req.body.status || 'active',
+      assigneesEmail: req.body.assigneesEmail
     }
-    let upd = {
-      $set: beneficiary
-    }
-    if (req.body.assigneesEmail) {
-      upd.$addToSet = { assigneesEmail: req.body.assigneesEmail }
-    }
-    beneficiary.key = `${beneficiary.organizationId.toLowerCase().trim()}_${beneficiary.firstName.toLowerCase().trim()}_${beneficiary.lastName.toLowerCase().trim()}`
-    beneficiaryService.findOneAndUpdate({ key: beneficiary.key }, upd, { upsert: true, new: true }).then(result => {
-      hr.send(res, result)
-    }).catch(reason => {
-      hr.error(res, reason)
-    })
+    beneficiaryService.save(beneficiary)
+      .then(result => {
+        hr.send(res, result)
+      }).catch(reason => {
+        hr.error(res, reason)
+      })
+  }
+
+  static avatar (req, res) {
+    if (!req.file) return hr.error(res, 'files is required', 422)
+    return hr.send(res, {})
   }
 
   static updateById (req, res) {
@@ -66,6 +67,18 @@ export default class BeneficiaryController {
       return hr.error(res, 'beneficiaryId is required', 422)
     }
     beneficiaryService.getByIdAndFilter(beneficiaryId, {organizationId}).then(result => {
+      hr.send(res, result)
+    }).catch(reason => {
+      hr.error(res, reason)
+    })
+  }
+
+  static getByassigneesEmail (req, res) {
+    const assigneeEmail = req.params.assigneeEmail
+    if (!assigneeEmail) {
+      return hr.error(res, 'assigneeEmail is required', 422)
+    }
+    beneficiaryService.find({ assigneesEmail: assigneeEmail }).then(result => {
       hr.send(res, result)
     }).catch(reason => {
       hr.error(res, reason)

@@ -57,7 +57,7 @@ let all = {
   },
   api: {
     payment: {
-      url: 'http://localhost:9004/api/v1/payment'
+      url: 'https://api.getpaidup.com/api/v1/payment'
     }
   },
   s3: {

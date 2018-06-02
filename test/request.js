@@ -10,7 +10,7 @@ it('POST# / it should create an requst', done => {
   chai
     .request(server)
     .post('/api/v1/organization/request')
-    .set('authorization', token)
+    .set('Authorization', token())
     .send(requestResults.payload)
     .end((err, res) => {
       res.should.have.status(200)
@@ -25,7 +25,7 @@ it('GET# /:id it should retrieve an organization', done => {
   chai
     .request(server)
     .get('/api/v1/organization/request/' + requestResults._id)
-    .set('authorization', token)
+    .set('authorization', token())
     .end((err, res) => {
       res.should.have.status(200)
       res.body.should.have.property('_id')
@@ -39,7 +39,7 @@ it('PUT# /:id it should update an organization', done => {
   chai
     .request(server)
     .put('/api/v1/organization/request/' + requestResults._id)
-    .set('authorization', token)
+    .set('authorization', token())
     .send({businessUrl: 'http://teamtest.com'})
     .end((err, res) => {
       res.should.have.status(200)
@@ -54,7 +54,7 @@ it('PUT# /:id/approve it should update an organization', done => {
   chai
     .request(server)
     .put('/api/v1/organization/request/' + requestResults._id +'/approve') //  + requestResults._id)
-    .set('authorization', token)
+    .set('authorization', token())
     .end((err, res) => {
       res.should.have.status(200)
       res.body.should.have.property('status')
