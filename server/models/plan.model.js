@@ -13,7 +13,7 @@ const credits = {
   description: { type: String, required: true },
   dateCharge: { type: Date, required: true },
   amount: { type: Number, required: true },
-  status: { type: String, enum: ['paid', 'credited', 'partially_refunded', 'refunded'], required: true }
+  status: { type: String, enum: ['paid', 'credited', 'partially_refunded', 'refunded', 'discount'], required: true }
 }
 
 const schema = {
