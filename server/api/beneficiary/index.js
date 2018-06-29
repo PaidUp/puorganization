@@ -40,5 +40,6 @@ router.post('/import', auth.validate, BeneficiaryController.import)
 router.get('/:beneficiaryId', auth.validate, BeneficiaryController.getById)
 router.get('/assignee/:assigneeEmail', auth.validate, BeneficiaryController.getByassigneesEmail)
 router.put('/:beneficiaryId', auth.validate, BeneficiaryController.updateById)
+router.delete('/:beneficiaryId', auth.validate, BeneficiaryController.delete)
 
 export default router
