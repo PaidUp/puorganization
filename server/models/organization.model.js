@@ -2,9 +2,8 @@ import CommonModel from './common.model'
 
 const season = {
   name: { type: String, required: true },
-  start: { type: Date },
-  end: { type: Date },
-  status: { type: [String], required: true, enum: ['active', 'inactive'] }
+  date: { type: Date },
+  status: { type: String, required: true, enum: ['active', 'inactive'] }
 }
 
 const schema = {

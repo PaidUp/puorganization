@@ -45,6 +45,18 @@ export default class BeneficiaryController {
     })
   }
 
+  static delete (req, res) {
+    const beneficiaryId = req.params.beneficiaryId
+    if (!beneficiaryId) {
+      return hr.error(res, 'beneficiaryId is required', 422)
+    }
+    beneficiaryService.findByIdAndDelete(beneficiaryId).then(result => {
+      hr.send(res, result)
+    }).catch(reason => {
+      hr.error(res, reason)
+    })
+  }
+
   static getListByOrganizationId (req, res) {
     const organizationId = req.params.organizationId
     if (!organizationId) {

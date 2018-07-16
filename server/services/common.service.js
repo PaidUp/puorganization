@@ -30,6 +30,10 @@ export default class CommonService {
     return this.model.findOneAndUpdate(conditions, update, options)
   }
 
+  findByIdAndDelete (id) {
+    return this.model.findByIdAndDelete(id)
+  }
+
   getByIdAndFilter (id, values) {
     values._id = new ObjectId(id)
     return this.model.findOne(values)

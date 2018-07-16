@@ -89,4 +89,8 @@ export default class CommonModel {
   findById (_id) {
     return this.Model.findById(_id).exec()
   }
+
+  findByIdAndDelete (_id) {
+    return this.Model.findByIdAndDelete(_id).exec()
+  }
 }
