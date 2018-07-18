@@ -6,7 +6,7 @@
       "watch": false,
       "env": {
         "NODE_ENV": "production",
-        "GOOGLE_APPLICATION_CREDENTIALS": "/var/lib/jenkins/gcredentials/pu-product.json"
+        "GOOGLE_APPLICATION_CREDENTIALS": "/home/ubuntu/gcredentials/service_account.json"
       }
     }
   ]
