@@ -6,6 +6,7 @@ const dues = {
   description: { type: String, required: true },
   dateCharge: { type: Date, required: true },
   maxDateCharge: { type: Date },
+  tags: { type: [String] },
   amount: { type: Number, required: true }
 }
 
@@ -13,7 +14,8 @@ const credits = {
   description: { type: String, required: true },
   dateCharge: { type: Date, required: true },
   amount: { type: Number, required: true },
-  status: { type: String, enum: ['paid', 'credited', 'partially_refunded', 'refunded', 'discount'], required: true }
+  tags: { type: [String] },
+  status: { type: String, enum: ['paid', 'credited', 'refunded', 'discount'], required: true }
 }
 
 const schema = {
