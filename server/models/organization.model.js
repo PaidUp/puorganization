@@ -27,7 +27,7 @@ const schema = {
   keyPublic: { type: String, required: true },
   seasons: { type: [season], default: [] },
   tags: { type: [String] },
-  status: { type: [String], required: true, enum: ['active', 'inactive'] }
+  status: { type: String, required: true, enum: ['active', 'inactive'] }
 }
 
 export default class OrganizationModel extends CommonModel {
