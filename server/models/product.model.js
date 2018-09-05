@@ -49,7 +49,8 @@ const schema = {
   customInfo: { type: customInfo },
   processingFees: { type: processingFees, required: true },
   collectFees: { type: collectFees, required: true },
-  payFees: { type: payFees, required: true }
+  payFees: { type: payFees, required: true },
+  unbundle: { type: Boolean }
 }
 
 export default class ProductModel extends CommonModel {
