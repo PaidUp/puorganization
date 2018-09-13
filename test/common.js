@@ -101,6 +101,10 @@ results.product.payload = {
   payFees: {
     processing: true,
     collect: true
+  },
+  collectionFees : {
+    fee : 3.5,
+    feeFlat : 0
   }
 }
 
