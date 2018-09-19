@@ -70,6 +70,13 @@ let all = {
         isPublic: true
       }
     }
+  },
+  email: {
+    options: {
+      apiKey: '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',
+      fromName: 'Support',
+      fromEmail: 'support@getpaidup.com'
+    }
   }
 }
 
