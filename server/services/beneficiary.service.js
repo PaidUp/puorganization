@@ -40,7 +40,7 @@ class BeneficiaryService extends CommonService {
     })
   }
 
-  bulk (buffer, userEmail) {
+  bulkBeneficiaries (buffer, userEmail) {
     let model = this.model
     let result = []
     let bufferStream = new stream.PassThrough()

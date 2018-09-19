@@ -29,7 +29,7 @@ export default class BeneficiaryController {
   static bulk (req, res) {
     const email = req.user.email
     if (!req.file) return hr.error(res, 'files is required', 422)
-    beneficiaryService.bulk(req.file.buffer, email)
+    beneficiaryService.bulkBeneficiaries(req.file.buffer, email)
     return hr.send(res, {})
   }
 
