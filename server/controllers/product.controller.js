@@ -42,6 +42,14 @@ export default class ProductController {
     })
   }
 
+  static getAll (req, res) {
+    productService.find({}).then(result => {
+      HandlerResponse.send(res, result)
+    }).catch(reason => {
+      HandlerResponse.error(res, reason)
+    })
+  }
+
   static getByOrganizationId (req, res) {
     const organizationId = req.params.organizationId
     const productId = req.params.productId

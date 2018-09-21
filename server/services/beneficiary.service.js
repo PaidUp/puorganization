@@ -55,6 +55,7 @@ class BeneficiaryService extends CommonService {
           }, {})
           csv.fromStream(bufferStream, {headers: true})
             .transform((data, next) => {
+              data.beneficiaryId = ''
               const organizationId = mapOrganizations[data.organization.trim()]
               if (!organizationId) {
                 data.status = 'Invalid organization'
@@ -78,6 +79,7 @@ class BeneficiaryService extends CommonService {
                   filter.status = 'active'
                   filter.assigneesEmail = [parentEmail]
                   model.save(filter).then(res => {
+                    data.beneficiaryId = res._id
                     data.status = 'Beneficiary added'
                     return next(null, data)
                   }).catch(reason => {
@@ -85,11 +87,13 @@ class BeneficiaryService extends CommonService {
                     return next(null, data)
                   })
                 } else if (beneficiary.assigneesEmail.includes(parentEmail)) {
+                  data.beneficiaryId = beneficiary._id
                   data.status = 'Beneficiary exists, email exists'
                   return next(null, data)
                 } else {
                   beneficiary.assigneesEmail.push(parentEmail)
                   beneficiary.save((err, res) => {
+                    data.beneficiaryId = beneficiary._id
                     if (err) {
                       data.status = err.toString()
                       return next(null, data)
@@ -104,7 +108,7 @@ class BeneficiaryService extends CommonService {
               result.push(data)
             })
             .on('end', function () {
-              const fields = ['beneficiaryFirstName', 'beneficiaryLastName', 'organization', 'parentEmail', 'status']
+              const fields = ['beneficiaryId', 'beneficiaryFirstName', 'beneficiaryLastName', 'organization', 'parentEmail', 'status']
               const json2csvParser = new Json2csvParser({ fields })
               const csv = json2csvParser.parse(result)
               const attachment = {

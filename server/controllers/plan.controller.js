@@ -51,6 +51,15 @@ export default class PlanController {
     })
   }
 
+  static getAll (req, res) {
+    console.log('######## plan controller')
+    planService.find({}).then(result => {
+      HandlerResponse.send(res, result)
+    }).catch(reason => {
+      HandlerResponse.error(res, reason)
+    })
+  }
+
   static getByProductId (req, res) {
     const productId = req.params.productId
     const planId = req.params.planId
