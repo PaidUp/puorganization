@@ -52,7 +52,6 @@ export default class PlanController {
   }
 
   static getAll (req, res) {
-    console.log('######## plan controller')
     planService.find({}).then(result => {
       HandlerResponse.send(res, result)
     }).catch(reason => {
