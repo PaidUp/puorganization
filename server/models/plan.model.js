@@ -23,6 +23,7 @@ const schema = {
   productId: { type: ObjectId, required: true, ref: 'pu_organization_products' },
   description: { type: String, required: true },
   visible: { type: Boolean, required: true },
+  groupId: { type: Boolean },
   status: { type: String, required: true, enum: ['active', 'inactive'] },
   paymentMethods: { type: [String], enum: ['bank', 'card'], lowercase: true },
   dues: { type: [dues], required: true },

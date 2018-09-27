@@ -50,7 +50,8 @@ const schema = {
   processingFees: { type: processingFees, required: true },
   collectionFees: { type: collectionFees, required: true },
   payFees: { type: payFees, required: true },
-  unbundle: { type: Boolean }
+  unbundle: { type: Boolean },
+  restrictProductModification: { type: Boolean }
 }
 
 export default class ProductModel extends CommonModel {
