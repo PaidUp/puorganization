@@ -45,9 +45,10 @@ let combinedMemoryMiddleware = (function () {
 
 const router = express.Router()
 router.post('/', auth.validate, BeneficiaryController.save)
-router.post('/avatar/:id', combinedMiddleware, BeneficiaryController.avatar)
+router.post('/create', auth.validate, BeneficiaryController.create)
 router.post('/bulk', combinedMemoryMiddleware, BeneficiaryController.bulk)
 router.post('/import', auth.validate, BeneficiaryController.import)
+router.post('/avatar/:id', combinedMiddleware, BeneficiaryController.avatar)
 router.get('/:beneficiaryId', auth.validate, BeneficiaryController.getById)
 router.get('/assignee/:assigneeEmail', auth.validate, BeneficiaryController.getByassigneesEmail)
 router.put('/:beneficiaryId', auth.validate, BeneficiaryController.updateById)

@@ -15,6 +15,36 @@ class BeneficiaryService extends CommonService {
     super(new BeneficiaryModel())
   }
 
+  saveOrUpdate ({firstName, lastName, organizationName, organizationId, assigneesEmail}) {
+    const filter = { firstName, lastName, organizationName }
+    let model = this.model
+    return new Promise((resolve, reject) => {
+      model.findOne(filter).then(beneficiary => {
+        if (!beneficiary) {
+          filter.organizationId = organizationId
+          filter.type = 'athlete'
+          filter.status = 'active'
+          filter.assigneesEmail = [assigneesEmail]
+          model.save(filter).then(res => {
+            resolve({message: 'Beneficiary added.', beneficiary})
+          }).catch(reason => {
+            reject(reason)
+          })
+        } else if (beneficiary.assigneesEmail.includes(assigneesEmail)) {
+          resolve({message: 'Beneficiary exists, email exists.', beneficiary})
+        } else {
+          beneficiary.assigneesEmail.push(assigneesEmail)
+          beneficiary.save((err, res) => {
+            if (err) {
+              reject(err)
+            }
+            resolve({message: 'Beneficiary exists, email added.', beneficiary})
+          })
+        }
+      })
+    })
+  }
+
   import (beneficiaries) {
     return new Promise((resolve, reject) => {
       try {

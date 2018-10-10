@@ -21,6 +21,30 @@ export default class BeneficiaryController {
       })
   }
 
+  static create (req, res) {
+    if (!req.body.organizationId) return hr.error(res, 'organizationId is required', 422)
+    if (!req.body.organizationName) return hr.error(res, 'organizationName is required', 422)
+    if (!req.body.firstName) return hr.error(res, 'firstName is required', 422)
+    if (!req.body.lastName) return hr.error(res, 'lastName is required', 422)
+    if (!req.body.assigneesEmail) return hr.error(res, 'assigneesEmail is required', 422)
+    let beneficiary = {
+      organizationId: req.body.organizationId,
+      organizationName: req.body.organizationName,
+      type: req.body.type || 'athlete',
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      description: req.body.description,
+      status: req.body.status || 'active',
+      assigneesEmail: req.body.assigneesEmail
+    }
+    beneficiaryService.saveOrUpdate(beneficiary)
+      .then(result => {
+        hr.send(res, result)
+      }).catch(reason => {
+        hr.error(res, reason)
+      })
+  }
+
   static avatar (req, res) {
     if (!req.file) return hr.error(res, 'files is required', 422)
     return hr.send(res, {})
