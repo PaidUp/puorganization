@@ -26,7 +26,7 @@ class BeneficiaryService extends CommonService {
           filter.status = 'active'
           filter.assigneesEmail = [assigneesEmail]
           model.save(filter).then(res => {
-            resolve({message: 'Beneficiary added.', beneficiary})
+            resolve({message: 'Beneficiary added.', beneficiary: res})
           }).catch(reason => {
             reject(reason)
           })
