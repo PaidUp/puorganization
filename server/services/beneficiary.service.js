@@ -155,6 +155,16 @@ class BeneficiaryService extends CommonService {
       }
     })
   }
+
+  search (criteria) {
+    return this.model.find({
+      $or: [
+        {firstName: new RegExp(criteria, 'i')},
+        {lastName: new RegExp(criteria, 'i')},
+        {assigneesEmail: new RegExp('^' + criteria + '$', 'i')}
+      ]
+    })
+  }
 }
 
 let beneficiaryService = new BeneficiaryService()

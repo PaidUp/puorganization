@@ -136,4 +136,12 @@ export default class BeneficiaryController {
       hr.error(res, reason)
     })
   }
+
+  static search (req, res) {
+    if (!req.query.criteria) return hr.error(res, 'Criteria is required', 422)
+    const criteria = req.query.criteria
+    beneficiaryService.search(criteria)
+      .then(users => hr.send(res, users))
+      .catch(reason => hr.error(res, reason))
+  }
 }
