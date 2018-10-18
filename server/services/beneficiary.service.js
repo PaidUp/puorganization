@@ -16,6 +16,7 @@ class BeneficiaryService extends CommonService {
   }
 
   saveOrUpdate ({firstName, lastName, organizationName, organizationId, assigneesEmail}) {
+    assigneesEmail = assigneesEmail.toLowerCase()
     const filter = { firstName, lastName, organizationName }
     let model = this.model
     return new Promise((resolve, reject) => {
