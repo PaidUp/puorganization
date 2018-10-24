@@ -15,4 +15,17 @@ export default class BeneficiaryModel extends CommonModel {
   constructor () {
     super('beneficiary', 'beneficiaries', schema)
   }
+
+  updateAssigneesEmail (oldEmail, newEmail) {
+    return new Promise((resolve, reject) => {
+      try {
+        this.Model.updateMany({ assigneesEmail: oldEmail }, { $set: { 'assigneesEmail.$': newEmail } }, (err, data) => {
+          if (err) return reject(err)
+          resolve(data)
+        })
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
 }
