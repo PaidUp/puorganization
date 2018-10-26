@@ -25,8 +25,6 @@ var upload = multer({
   })
 })
 
-let uploadMemory = multer({ storage: multer.memoryStorage() })
-
 let combinedMiddleware = (function () {
   let chain = connect();
   [auth.validate, upload.single('avatar')].forEach(function (middleware) {
@@ -35,18 +33,9 @@ let combinedMiddleware = (function () {
   return chain
 })()
 
-let combinedMemoryMiddleware = (function () {
-  let chain = connect();
-  [auth.validate, uploadMemory.single('file')].forEach(function (middleware) {
-    chain.use(middleware)
-  })
-  return chain
-})()
-
 const router = express.Router()
 router.post('/', auth.validate, BeneficiaryController.save)
 router.post('/create', auth.validate, BeneficiaryController.create)
-router.post('/bulk', combinedMemoryMiddleware, BeneficiaryController.bulk)
 router.post('/import', auth.validate, BeneficiaryController.import)
 router.post('/avatar/:id', combinedMiddleware, BeneficiaryController.avatar)
 router.get('/search', auth.validate, BeneficiaryController.search)

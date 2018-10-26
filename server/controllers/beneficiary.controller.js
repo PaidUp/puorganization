@@ -50,13 +50,6 @@ export default class BeneficiaryController {
     return hr.send(res, {})
   }
 
-  static bulk (req, res) {
-    const email = req.user.email
-    if (!req.file) return hr.error(res, 'files is required', 422)
-    beneficiaryService.bulkBeneficiaries(req.file.buffer, email)
-    return hr.send(res, {})
-  }
-
   static updateById (req, res) {
     const beneficiary = req.body
     const beneficiaryId = req.params.beneficiaryId
