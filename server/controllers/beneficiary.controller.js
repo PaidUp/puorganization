@@ -145,4 +145,12 @@ export default class BeneficiaryController {
       .then(resp => hr.send(res, resp))
       .catch(reason => hr.error(res, reason))
   }
+
+  static updateAddAssigneeEmail (req, res) {
+    if (!req.body.email) return hr.error(res, 'email is required', 422)
+    if (!req.body.id) return hr.error(res, 'id is required', 422)
+    beneficiaryService.updateAddAssigneeEmail(req.body)
+      .then(resp => hr.send(res, resp))
+      .catch(reason => hr.error(res, reason))
+  }
 }

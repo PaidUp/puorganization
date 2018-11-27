@@ -42,6 +42,7 @@ router.get('/search', auth.validate, BeneficiaryController.search)
 router.get('/assignee/:assigneeEmail', auth.validate, BeneficiaryController.getByassigneesEmail)
 router.get('/:beneficiaryId', auth.validate, BeneficiaryController.getById)
 router.put('/email', auth.validate, BeneficiaryController.updateAssigneesEmail)
+router.put('/email/add', auth.validate, BeneficiaryController.updateAddAssigneeEmail)
 router.put('/:beneficiaryId', auth.validate, BeneficiaryController.updateById)
 router.delete('/:beneficiaryId', auth.validate, BeneficiaryController.delete)
 

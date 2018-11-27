@@ -72,11 +72,16 @@ export default class CommonModel {
     })
   }
 
-  updateById (id, value) {
+  updateById (id, value, push) {
+    let params = {
+      $set: value,
+      $inc: {__v: 1}
+    }
+    if (push) params.$push = push
     return new Promise((resolve, reject) => {
       try {
         value['updateOn'] = Date.now()
-        this.Model.findByIdAndUpdate(id, { $set: value }, { new: true }, (err, data) => {
+        this.Model.findByIdAndUpdate(id, params, { new: true }, (err, data) => {
           if (err) return reject(err)
           resolve(data)
         })

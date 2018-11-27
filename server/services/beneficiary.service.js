@@ -75,6 +75,10 @@ class BeneficiaryService extends CommonService {
   updateAssigneesEmail (oldEmail, newEmail) {
     return this.model.updateAssigneesEmail(oldEmail, newEmail)
   }
+
+  updateAddAssigneeEmail ({id, email}) {
+    return this.model.updateById(id, {}, {assigneesEmail: email})
+  }
 }
 
 let beneficiaryService = new BeneficiaryService()
