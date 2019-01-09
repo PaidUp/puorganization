@@ -26,6 +26,10 @@ export default class CommonService {
     return this.model.find(filter)
   }
 
+  findOne (filter) {
+    return this.model.findOne(filter)
+  }
+
   findOneAndUpdate (conditions, update, options) {
     return this.model.findOneAndUpdate(conditions, update, options)
   }

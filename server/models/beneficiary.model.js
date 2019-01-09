@@ -7,6 +7,7 @@ const schema = {
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   description: { type: String },
+  programs: { type: [String] },
   assigneesEmail: { type: Array, required: true },
   status: { type: String, required: true, enum: ['active', 'inactive'] }
 }

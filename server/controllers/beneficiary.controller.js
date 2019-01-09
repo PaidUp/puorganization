@@ -2,23 +2,28 @@ import { beneficiaryService } from '@/services'
 import { HandlerResponse as hr } from 'pu-common'
 
 export default class BeneficiaryController {
-  static save (req, res) {
-    let beneficiary = {
-      organizationId: req.body.organizationId,
-      organizationName: req.body.organizationName,
-      type: req.body.type || 'athlete',
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      description: req.body.description,
-      status: req.body.status || 'active',
-      assigneesEmail: req.body.assigneesEmail
-    }
-    beneficiaryService.save(beneficiary)
-      .then(result => {
-        hr.send(res, result)
-      }).catch(reason => {
-        hr.error(res, reason)
+  static async save (req, res) {
+    const {organizationId, organizationName, type = 'athlete', firstName, lastName, description, status = 'active', assigneesEmail, programs} = req.body
+    let params = { organizationId, organizationName, type, firstName, lastName, description, status, assigneesEmail, programs }
+    const beneficiary = await beneficiaryService.findOne({ organizationId, firstName, lastName })
+    if (beneficiary) {
+      if (assigneesEmail) beneficiary.assigneesEmail.push(assigneesEmail)
+      if (programs) {
+        beneficiary.programs.push(programs)
+        beneficiary.programs = [...new Set(beneficiary.programs)]
+      }
+      beneficiary.save((err, result) => {
+        if (err) return hr.error(res, err)
+        return hr.send(res, result)
       })
+    } else {
+      beneficiaryService.save(params)
+        .then(result => {
+          hr.send(res, result)
+        }).catch(reason => {
+          hr.error(res, reason)
+        })
+    }
   }
 
   static create (req, res) {
