@@ -27,7 +27,7 @@
   "author": "@paidUp",
   "license": "private",
   "dependencies": {
-    "aws-sdk": "^2.247.1",
+    "aws-sdk": "^2.814.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "camelize": "^1.0.0",
